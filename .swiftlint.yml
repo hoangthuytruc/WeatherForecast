@@ -1,0 +1,37 @@
+opt_in_rules:
+  - closure_spacing
+  - closure_end_indentation
+  - convenience_type
+  - empty_count
+  - empty_string
+  - empty_xctest_method
+  - explicit_init
+  - first_where
+  - implicit_return
+  - implicitly_unwrapped_optional
+  - joined_default_parameter
+  - literal_expression_end_indentation
+  - modifier_order
+  - multiline_function_chains
+  - no_extension_access_modifier
+  - operator_usage_whitespace
+  - overridden_super_call
+  - prohibited_super_call
+  - sorted_first_last
+  - vertical_parameter_alignment_on_call
+  - yoda_condition
+
+included:
+  - WeatherForecast
+
+identifier_name:
+  excluded:
+    - iv
+    - os
+    - ok
+    - id
+
+implicit_return:
+  included:
+    - getter
+    - closure
