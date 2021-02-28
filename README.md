@@ -2,17 +2,24 @@
 WeatherForecast is an application to retrieve weather information within 5-7 days.
 
 ## Screenshot
-![](/screenshots/screenshot.png)
+![screenshot](/screenshots/screenshot.png)
 
 ## Overview
-### Architectural pattern: MVVM
+### The structure of project
 ```
 | WeatherForecast/
 |--- Configuration/
 |--- ApiSerice/
 |--- LocalDatabaseService/
 |--- Decorator/
-|--- Model/      
+|    |--- TextSizeEditor/
+|--- Model/
+|    |--- QueryWeather/
+|    |    |--- Weather/
+|    |    |    |--- City/
+|    |    |    |--- WeatherItem/
+|    |    |--- QueryWeatherRequest
+|    |    |--- QueryWeatherResponse
 |--- Controllers/
 |    |--- Weather
 |    |    |--- ViewModel
@@ -21,12 +28,22 @@ WeatherForecast is an application to retrieve weather information within 5-7 day
 | WeatherForecastTests
 | WeatherForecastUITests
 ```
+
+### Architectural pattern: MVVM
+
+- **Model:** contains the structures of application data. 
+- **View:** contains the visual components of interfaces. They usually handles the logics of view such as clicked button, a view presentation and so on.
+- **ViewModel:** handle all logics relating to bussiness logic. 
+
 ### Design patterns: 
 1. Decorator: handle scaling text for the disability.
 2. Singleton: handle calling APIs, insert/get the weather information from the cache.
 
 ### Libraries: 
-1. SwiftLint: to check automatically coding conventions.
+1. SwiftLint: to check automatically the coding convention.
+
+### Cache
+The cache is only using a `Dictionary` to store the weather information for simplicity. 
 
 ## Installation
 1. Download **[the ZIP](https://github.com/hoangthuytruc/WeatherForecast/releases/tag/v1.0)** for the lastest release.
@@ -51,3 +68,11 @@ WeatherForecast is an application to retrieve weather information within 5-7 day
 - [x] Handle failures.
 - [x] Support the disability to scale large text.
 - [ ] Support the disability to read out the text using VoiceOver controls.
+- [x] UnitTests
+- [ ] UITests
+
+## Configuration
+The `OpenWeatherMaps API` requires `APPID` to access its APIs. In case of the default `APPID` invalid, you can replace it with yours ([sign up and get a new one for free](https://openweathermap.org/api)), simply use:
+```
+  Configuration.appID = 'your APPID'
+```
