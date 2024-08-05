@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22685"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -197,7 +198,106 @@
                 <outlet property="tempLabel" destination="QLT-1I-TiB" id="saQ-VW-7Lg"/>
                 <outlet property="tempTitleLabel" destination="OSm-tZ-Gmm" id="80i-r8-YF4"/>
             </connections>
-            <point key="canvasLocation" x="51.449275362318843" y="103.79464285714285"/>
+            <point key="canvasLocation" x="63" y="86"/>
         </tableViewCell>
+        <view contentMode="scaleToFill" id="bzS-KB-B7G">
+            <rect key="frame" x="0.0" y="0.0" width="369" height="120"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hH0-gX-F6H">
+                    <rect key="frame" x="16" y="16" width="137" height="29"/>
+                    <attributedString key="attributedText">
+                        <fragment content="My Location">
+                            <attributes>
+                                <font key="NSFont" size="24" name="HelveticaNeue-Medium"/>
+                                <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                            </attributes>
+                        </fragment>
+                    </attributedString>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Xi-4E-WlA">
+                    <rect key="frame" x="16" y="48" width="109" height="17"/>
+                    <attributedString key="attributedText">
+                        <fragment content="Ho Chi Minh City">
+                            <attributes>
+                                <font key="NSFont" size="14" name="HelveticaNeue-Medium"/>
+                            </attributes>
+                        </fragment>
+                    </attributedString>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lxp-Eh-FrO">
+                    <rect key="frame" x="16" y="85" width="93" height="17"/>
+                    <attributedString key="attributedText">
+                        <fragment content="Mostly Cloudy">
+                            <attributes>
+                                <font key="NSFont" size="14" name="HelveticaNeue-Medium"/>
+                            </attributes>
+                        </fragment>
+                    </attributedString>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="top" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EBf-VZ-7xv">
+                    <rect key="frame" x="299.5" y="16" width="53.5" height="57.5"/>
+                    <attributedString key="attributedText">
+                        <fragment content="25">
+                            <attributes>
+                                <font key="NSFont" size="48" name="HelveticaNeue-Medium"/>
+                                <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="rightToLeft" tighteningFactorForTruncation="0.0"/>
+                            </attributes>
+                        </fragment>
+                    </attributedString>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="STR-9h-h25">
+                    <rect key="frame" x="321.5" y="85" width="31.5" height="17"/>
+                    <attributedString key="attributedText">
+                        <fragment content="L: 24">
+                            <attributes>
+                                <font key="NSFont" size="14" name="HelveticaNeue-Medium"/>
+                            </attributes>
+                        </fragment>
+                    </attributedString>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hUL-t1-PWU">
+                    <rect key="frame" x="280" y="85" width="33.5" height="17"/>
+                    <attributedString key="attributedText">
+                        <fragment content="H: 33">
+                            <attributes>
+                                <font key="NSFont" size="14" name="HelveticaNeue-Medium"/>
+                                <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                            </attributes>
+                        </fragment>
+                    </attributedString>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="4Ya-Ek-sGR"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstItem="4Ya-Ek-sGR" firstAttribute="trailing" secondItem="EBf-VZ-7xv" secondAttribute="trailing" constant="16" id="1bp-fq-7cU"/>
+                <constraint firstItem="hH0-gX-F6H" firstAttribute="leading" secondItem="bzS-KB-B7G" secondAttribute="leading" constant="16" id="6OE-Ze-iAy"/>
+                <constraint firstItem="lxp-Eh-FrO" firstAttribute="leading" secondItem="4Ya-Ek-sGR" secondAttribute="leading" constant="16" id="Dfu-W7-bbM"/>
+                <constraint firstItem="7Xi-4E-WlA" firstAttribute="leading" secondItem="hH0-gX-F6H" secondAttribute="leading" id="EOi-sK-nsf"/>
+                <constraint firstItem="STR-9h-h25" firstAttribute="leading" secondItem="hUL-t1-PWU" secondAttribute="trailing" constant="8" id="GLR-H9-wJd"/>
+                <constraint firstItem="lxp-Eh-FrO" firstAttribute="bottom" secondItem="4Ya-Ek-sGR" secondAttribute="bottom" constant="16" id="LI2-6T-DRh"/>
+                <constraint firstItem="7Xi-4E-WlA" firstAttribute="top" secondItem="4Ya-Ek-sGR" secondAttribute="top" id="NHn-el-Z4v"/>
+                <constraint firstItem="hUL-t1-PWU" firstAttribute="top" secondItem="STR-9h-h25" secondAttribute="top" id="Qfe-7i-Ut0"/>
+                <constraint firstItem="STR-9h-h25" firstAttribute="trailing" secondItem="EBf-VZ-7xv" secondAttribute="trailing" id="Rph-yC-pPe"/>
+                <constraint firstItem="EBf-VZ-7xv" firstAttribute="top" secondItem="hH0-gX-F6H" secondAttribute="top" id="WHx-Vf-roL"/>
+                <constraint firstItem="hUL-t1-PWU" firstAttribute="bottom" secondItem="STR-9h-h25" secondAttribute="bottom" id="XwA-3M-0b9"/>
+                <constraint firstItem="STR-9h-h25" firstAttribute="bottom" secondItem="lxp-Eh-FrO" secondAttribute="bottom" id="ZTx-lB-NsB"/>
+                <constraint firstItem="hH0-gX-F6H" firstAttribute="top" secondItem="bzS-KB-B7G" secondAttribute="top" constant="16" id="c6N-Zd-ogn"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="686.23188405797111" y="56.25"/>
+        </view>
     </objects>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
 </document>

@@ -64,6 +64,11 @@
 		E464160725EBA0E200C84A73 /* LocalDatabaseServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E464160625EBA0E200C84A73 /* LocalDatabaseServiceTests.swift */; };
 		E464160F25EBA11400C84A73 /* WeatherViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E464160E25EBA11400C84A73 /* WeatherViewModelTests.swift */; };
 		E464163025EBA62800C84A73 /* ApiServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E464162F25EBA62800C84A73 /* ApiServiceTests.swift */; };
+		E475E26C2C6148C9009B86C5 /* WeatherDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E475E26B2C6148C9009B86C5 /* WeatherDetailViewController.xib */; };
+		E475E26D2C6148C9009B86C5 /* WeatherDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E475E26A2C6148C9009B86C5 /* WeatherDetailViewController.swift */; };
+		E475E2702C6152AF009B86C5 /* WeatherDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E475E26F2C6152AF009B86C5 /* WeatherDetailViewModel.swift */; };
+		E475E2732C615323009B86C5 /* ItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E475E2722C615323009B86C5 /* ItemCell.xib */; };
+		E475E2742C615323009B86C5 /* ItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E475E2712C615323009B86C5 /* ItemCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -153,6 +158,11 @@
 		E464160625EBA0E200C84A73 /* LocalDatabaseServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalDatabaseServiceTests.swift; sourceTree = "<group>"; };
 		E464160E25EBA11400C84A73 /* WeatherViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherViewModelTests.swift; sourceTree = "<group>"; };
 		E464162F25EBA62800C84A73 /* ApiServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiServiceTests.swift; sourceTree = "<group>"; };
+		E475E26A2C6148C9009B86C5 /* WeatherDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherDetailViewController.swift; sourceTree = "<group>"; };
+		E475E26B2C6148C9009B86C5 /* WeatherDetailViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WeatherDetailViewController.xib; sourceTree = "<group>"; };
+		E475E26F2C6152AF009B86C5 /* WeatherDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherDetailViewModel.swift; sourceTree = "<group>"; };
+		E475E2712C615323009B86C5 /* ItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemCell.swift; sourceTree = "<group>"; };
+		E475E2722C615323009B86C5 /* ItemCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ItemCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -320,7 +330,7 @@
 			children = (
 				E462BF0825EA1B2C00891B12 /* Base */,
 				E462BF0C25EA1B4C00891B12 /* Weather */,
-				E46415CA25EB631700C84A73 /* TextSizeView */,
+				E475E26E2C615290009B86C5 /* WeatherDetail */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -340,6 +350,7 @@
 		E462BEBF25EA15A600891B12 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				E46415CA25EB631700C84A73 /* TextSizeView */,
 				E462BEB225EA116900891B12 /* Date+Ext.swift */,
 				E462BEF925EA1A0A00891B12 /* UILabel+Ext.swift */,
 				E462BEFE25EA1A4700891B12 /* UIFont+Ext.swift */,
@@ -435,6 +446,26 @@
 				E464162F25EBA62800C84A73 /* ApiServiceTests.swift */,
 			);
 			path = ApiService;
+			sourceTree = "<group>";
+		};
+		E475E26E2C615290009B86C5 /* WeatherDetail */ = {
+			isa = PBXGroup;
+			children = (
+				E475E2752C615328009B86C5 /* Cells */,
+				E475E26A2C6148C9009B86C5 /* WeatherDetailViewController.swift */,
+				E475E26B2C6148C9009B86C5 /* WeatherDetailViewController.xib */,
+				E475E26F2C6152AF009B86C5 /* WeatherDetailViewModel.swift */,
+			);
+			path = WeatherDetail;
+			sourceTree = "<group>";
+		};
+		E475E2752C615328009B86C5 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				E475E2712C615323009B86C5 /* ItemCell.swift */,
+				E475E2722C615323009B86C5 /* ItemCell.xib */,
+			);
+			path = Cells;
 			sourceTree = "<group>";
 		};
 		F5188555CA8701C378CED61D /* Pods */ = {
@@ -558,11 +589,13 @@
 			files = (
 				E454F9B425EA7DD9006A3640 /* WeatherViewController.xib in Resources */,
 				E462BE6B25E9FBD900891B12 /* WeatherCell.xib in Resources */,
+				E475E26C2C6148C9009B86C5 /* WeatherDetailViewController.xib in Resources */,
 				E46415F025EB8DA900C84A73 /* saigon_weather.json in Resources */,
 				E42CC7D425EBDD1B003F06CE /* .swiftlint.yml in Resources */,
 				E462BE4225E9F8C200891B12 /* LaunchScreen.storyboard in Resources */,
 				E462BE3F25E9F8C200891B12 /* Assets.xcassets in Resources */,
 				E46415A625EB477700C84A73 /* TextSizeView.xib in Resources */,
+				E475E2732C615323009B86C5 /* ItemCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -680,7 +713,9 @@
 				E42CC7B125EBC573003F06CE /* LocalDatabaseServiceType.swift in Sources */,
 				E4532C9725EA4C64002B7E55 /* BaseResponse.swift in Sources */,
 				E462BEA125EA09DD00891B12 /* Weather.swift in Sources */,
+				E475E26D2C6148C9009B86C5 /* WeatherDetailViewController.swift in Sources */,
 				E462BE6A25E9FBD900891B12 /* WeatherCell.swift in Sources */,
+				E475E2702C6152AF009B86C5 /* WeatherDetailViewModel.swift in Sources */,
 				E4532C8625EA4BC9002B7E55 /* HTTPMethod.swift in Sources */,
 				E462BE3A25E9F8C100891B12 /* WeatherViewController.swift in Sources */,
 				E462BE9C25EA09B800891B12 /* FeelsLikeTemperature.swift in Sources */,
@@ -690,6 +725,7 @@
 				E462BEFF25EA1A4700891B12 /* UIFont+Ext.swift in Sources */,
 				E46415A125EB476400C84A73 /* TextSizeViewView.swift in Sources */,
 				E46415E625EB759C00C84A73 /* DialogViewPresentable.swift in Sources */,
+				E475E2742C615323009B86C5 /* ItemCell.swift in Sources */,
 				E462BF0425EA1A5E00891B12 /* UITextField+Ext.swift in Sources */,
 				E4532C4025EA1F12002B7E55 /* ApiService.swift in Sources */,
 				E462BE3625E9F8C100891B12 /* AppDelegate.swift in Sources */,

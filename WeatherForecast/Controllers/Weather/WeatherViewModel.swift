@@ -16,7 +16,7 @@ protocol WeatherViewModelType {
     func searchWeather(at city: String)
 }
 
-protocol WeatherViewModelDelegate: class {
+protocol WeatherViewModelDelegate: AnyObject {
     func viewWillQueryWeather()
     func viewDidQueryWeather()
     
