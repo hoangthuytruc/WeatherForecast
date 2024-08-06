@@ -59,7 +59,10 @@ extension WeatherViewController: UITableViewDataSource,
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let item = viewModel.items[indexPath.row]
-        
+        let controller = WeatherDetailViewController(
+            viewModel: WeatherDetailViewModel(item: item)
+        )
+        present(controller, animated: true)
     }
 }
 

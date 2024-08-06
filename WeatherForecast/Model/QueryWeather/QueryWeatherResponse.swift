@@ -20,10 +20,10 @@ struct Wind: Decodable {
 }
 
 struct Rain: Decodable {
-    let hourly: Float
+    let lastHour: Float
     
     private enum CodingKeys: String, CodingKey {
-        case hourly = "1h"
+        case lastHour = "1h"
     }
 }
 
@@ -39,15 +39,24 @@ struct Sys: Decodable {
     let type: Int
     let id: Int
     let country: String
-    let sunrise: Int
-    let sunset: Int
+    private let sunriseTimeInterval: Int
+    private let sunsetTimeInternal: Int
     
     private enum CodingKeys: String, CodingKey {
         case type = "type"
         case id = "id"
         case country = "country"
-        case sunrise = "sunrise"
-        case sunset = "sunset"
+        case sunriseTimeInterval = "sunrise"
+        case sunsetTimeInternal = "sunset"
+    }
+}
+
+extension Sys {
+    var sunrise: Date {
+        Date(timeIntervalSince1970: TimeInterval(sunriseTimeInterval))
+    }
+    var sunset: Date {
+        Date(timeIntervalSince1970: TimeInterval(sunsetTimeInternal))
     }
 }
 

@@ -27,6 +27,5 @@ class WeatherCell: UITableViewCell {
         highestTempLabel.text = String(format: "H: %@", item.detail.tempMax.toCelsius())
         lowestTempLabel.text = String(format: "L: %@", item.detail.tempMin.toCelsius())
         tempLabel.text = item.detail.temp.toCelsius()
-        tempLabel.sizeToFit()
     }
 }
