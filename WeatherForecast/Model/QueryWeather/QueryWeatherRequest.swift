@@ -16,7 +16,6 @@ struct QueryWeatherRequest: Encodable {
     
     func asParams() -> [String: String] {
         ["q": city,
-         "cnt": "\(pageSize)",
          "appid": appid,
          "units": units.rawValue,
          "lang": language.code

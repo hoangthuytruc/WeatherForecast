@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 protocol WeatherViewModelType {
-    var items: [WeatherItem] { get }
+    var items: [QueryWeatherResponse] { get }
     var delegate: WeatherViewModelDelegate? { get set }
     
     func viewDidLoad()
@@ -39,7 +39,7 @@ final class WeatherViewModel: WeatherViewModelType {
         self.defaultCity = defaultCity
     }
     
-    var items: [WeatherItem] = [] {
+    var items: [QueryWeatherResponse] = [] {
         didSet {
             DispatchQueue.main.async {
                 self.delegate?.reloadData()
@@ -48,48 +48,21 @@ final class WeatherViewModel: WeatherViewModelType {
     }
     
     func viewDidLoad() {
-        getWeather(at: defaultCity)
+        queryWeather(at: defaultCity)
     }
     
     func searchWeather(at city: String) {
-        guard !city.isEmpty else {
-            getWeather(at: defaultCity)
-            return
-        }
-        
-        guard city.count > 2 else {
-            return
-        }
-        getWeather(at: city)
-    }
-    
-    private func getWeather(at city: String) {
-        delegate?.viewWillQueryWeather()
-        localDatabaseService.getWeatherObjects(at: city) { [weak self] (items) in
-            if let items = items {
-                self?.items = items
-                self?.delegate?.viewDidQueryWeather()
-            } else {
-                self?.queryWeather(at: city)
-            }
-        }
+        queryWeather(at: city)
     }
     
     private func queryWeather(at city: String) {
         apiService.queryWeather(at: city) { [weak self] (result) in
             switch result {
             case .success(let response):
-                self?.localDatabaseService.insertWeatherObjects(
-                    at: response.city,
-                    objects: response.weatherItems,
-                    with: city,
-                    completionHandler: {
-                        self?.getWeather(at: city)
-                    }
-                )
+                self?.items.append(response)
+                self?.delegate?.viewDidQueryWeather()
                 
             case .failure(let error):
-                self?.items = []
                 self?.delegate?.viewDidQueryWeather()
                 self?.delegate?.showError(error)
             }

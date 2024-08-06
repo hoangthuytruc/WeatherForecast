@@ -14,7 +14,6 @@ class WeatherViewController: BaseViewController {
     
     private var viewModel: WeatherViewModelType
     private var timer: Timer?
-    private var textSizeView: TextSizeView?
         
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -28,13 +27,7 @@ class WeatherViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Weather Forecast"
-        navigationItem.rightBarButtonItem = UIBarButtonItem(
-            image: UIImage(named: "ic_text_size"),
-            style: .plain,
-            target: self,
-            action: #selector(showTextSizeView)
-        )
+        title = "Weather"
         activityIndicator.isHidden = true
         
         tableView.register(
@@ -42,47 +35,15 @@ class WeatherViewController: BaseViewController {
             forCellReuseIdentifier: "Cell"
         )
         tableView.dataSource = self
+        tableView.delegate = self
         searchBar.delegate = self
-        view.addGestureRecognizer(
-            UITapGestureRecognizer(
-                target: self,
-                action: #selector(dismissTextSizeView)
-            )
-        )
         viewModel.delegate = self
         viewModel.viewDidLoad()
     }
-    
-    @objc func showTextSizeView() {
-        guard textSizeView == nil else {
-            return
-        }
-        textSizeView = TextSizeView.fromNib()
-        textSizeView?.delegate = self
-        view.insertSubview(textSizeView!, aboveSubview: view)
-        NSLayoutConstraint.activate([
-            textSizeView!.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            textSizeView!.trailingAnchor.constraint(equalTo: view.trailingAnchor)
-        ])
-    }
-    
-    @objc func searchWeather() {
-        if let text = searchBar.text {
-            viewModel.searchWeather(at: text)
-        }
-    }
-    
-    @objc func dismissTextSizeView(touch: UITapGestureRecognizer) {
-        let touchPoint = touch.location(in: view)
-        if let subView = textSizeView,
-           !subView.frame.contains(touchPoint) {
-            subView.removeFromSuperview()
-            textSizeView = nil
-        }
-    }
 }
 
-extension WeatherViewController: UITableViewDataSource {
+extension WeatherViewController: UITableViewDataSource,
+                                 UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModel.items.count
     }
@@ -94,6 +55,11 @@ extension WeatherViewController: UITableViewDataSource {
         }
         cell.configureCell(viewModel.items[indexPath.row])
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let item = viewModel.items[indexPath.row]
+        
     }
 }
 
@@ -121,32 +87,9 @@ extension WeatherViewController: WeatherViewModelDelegate {
 }
 
 extension WeatherViewController: UISearchBarDelegate {
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        if timer != nil {
-            timer?.invalidate()
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        if let text = searchBar.text, !text.isEmpty {
+            viewModel.searchWeather(at: text)
         }
-        
-        timer = Timer.scheduledTimer(
-            timeInterval: 1,
-            target: self,
-            selector: #selector(searchWeather),
-            userInfo: nil,
-            repeats: false
-        )
-    }
-    
-    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        searchBar.text = nil
-        searchBar.endEditing(true)
-        viewModel.searchWeather(at: "")
-    }
-}
-
-extension WeatherViewController: TextSizeViewDelegate {
-    func textSizeDidChange(_ textSize: CGFloat) {
-        view.subviews.forEach({ view in
-            let decorator = TextSizeDecorator(view)
-            decorator.apply(newTextSize: textSize)
-        })
     }
 }

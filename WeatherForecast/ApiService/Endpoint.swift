@@ -8,5 +8,5 @@
 import Foundation
 
 enum Endpoint {
-    static let queryWeather = "/data/2.5/forecast/daily"
+    static let queryWeather = "/data/2.5/weather"
 }

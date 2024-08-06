@@ -8,32 +8,25 @@
 import UIKit
 
 class WeatherCell: UITableViewCell {
-    @IBOutlet weak var dateTitleLabel: UILabel!
-    @IBOutlet weak var dateLabel: UILabel!
-    @IBOutlet weak var tempTitleLabel: UILabel!
-    @IBOutlet weak var tempLabel: UILabel!
-    @IBOutlet weak var pressureTitleLabel: UILabel!
-    @IBOutlet weak var pressureLabel: UILabel!
-    @IBOutlet weak var humidityTitleLabel: UILabel!
-    @IBOutlet weak var humidityLabel: UILabel!
-    @IBOutlet weak var descTitleLabel: UILabel!
+    
+    @IBOutlet weak var locationLabel: UILabel!
+    @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var descLabel: UILabel!
+    @IBOutlet weak var tempLabel: UILabel!
+    @IBOutlet weak var highestTempLabel: UILabel!
+    @IBOutlet weak var lowestTempLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        dateTitleLabel.text = "Date:"
-        tempTitleLabel.text = "Average Temperature:"
-        pressureTitleLabel.text = "Pressure:"
-        humidityTitleLabel.text = "Humidity:"
-        descTitleLabel.text = "Description:"
-        scaleUIElementsIfNeeded(in: self)
     }
     
-    func configureCell(_ item: WeatherItem) {
-        dateLabel.text = item.date.toString()
-        tempLabel.text = item.temps.day.toCelsius()
-        pressureLabel.text = "\(item.pressure)"
-        humidityLabel.text = "\(item.humidity)%"
-        descLabel.text = item.weather.first?.desc
+    func configureCell(_ item: QueryWeatherResponse) {
+        locationLabel.text = item.cityName
+        timeLabel.text = item.date.toString()
+        descLabel.text = item.weather.first?.desc.capitalized ?? ""
+        highestTempLabel.text = String(format: "H: %@", item.detail.tempMax.toCelsius())
+        lowestTempLabel.text = String(format: "L: %@", item.detail.tempMin.toCelsius())
+        tempLabel.text = item.detail.temp.toCelsius()
+        tempLabel.sizeToFit()
     }
 }

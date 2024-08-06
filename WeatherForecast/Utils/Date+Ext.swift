@@ -8,7 +8,7 @@
 import Foundation
 
 extension Date {
-    func toString(format: String = "E, dd MMM yyyy", timeZone: TimeZone? = nil, locale: Locale? = nil) -> String {
+    func toString(format: String = "HH:mm", timeZone: TimeZone? = nil, locale: Locale? = nil) -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = format
         if let locale = locale {

@@ -12,7 +12,17 @@ class BaseNavigationController: UINavigationController {
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationBar.isTranslucent = false
-        navigationBar.tintColor = .black
+        navigationBar.backgroundColor = .white
+        if #available(iOS 11.0, *) {
+            navigationBar.prefersLargeTitles = true
+        }
         
+        if #available(iOS 15, *) {
+            let appearance = UINavigationBarAppearance()
+            appearance.configureWithOpaqueBackground()
+            appearance.shadowColor = .clear
+            UINavigationBar.appearance().standardAppearance = appearance
+            UINavigationBar.appearance().scrollEdgeAppearance = appearance
+        }
     }
 }

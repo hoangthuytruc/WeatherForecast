@@ -11,9 +11,9 @@ extension Double {
     func toCelsius() -> String {
         let formatter = MeasurementFormatter()
         formatter.numberFormatter.numberStyle = .none
-        formatter.unitStyle = .medium
+        formatter.unitStyle = .short
         let temp = Measurement(value: Double(floor(self)), unit: UnitTemperature.celsius)
         
-        return temp.description.replacingOccurrences(of: ".0", with: "")
+        return formatter.string(from: temp)
     }
 }
