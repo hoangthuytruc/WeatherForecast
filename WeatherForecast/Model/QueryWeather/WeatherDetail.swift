@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct WeatherItem: Decodable, Hashable {
+struct WeatherDetail: Decodable, Hashable {
     let temp: Double
     let tempMin: Double
     let tempMax: Double

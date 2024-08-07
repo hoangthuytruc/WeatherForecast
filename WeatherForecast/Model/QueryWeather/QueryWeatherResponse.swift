@@ -11,7 +11,7 @@ struct QueryWeatherResponse: Decodable {
     let coord: Coordinate
     let weather: [Weather]
     let base: String
-    let detail: WeatherItem
+    let detail: WeatherDetail
     let visibility: Double
     let wind: Wind
     let rain: Rain?
