@@ -43,17 +43,10 @@
 		E462BEB325EA116900891B12 /* Date+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = E462BEB225EA116900891B12 /* Date+Ext.swift */; };
 		E462BEEA25EA18BD00891B12 /* WeatherViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E462BEE925EA18BD00891B12 /* WeatherViewModel.swift */; };
 		E462BEF225EA198C00891B12 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E462BEF125EA198C00891B12 /* BaseViewController.swift */; };
-		E462BEFA25EA1A0A00891B12 /* UILabel+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = E462BEF925EA1A0A00891B12 /* UILabel+Ext.swift */; };
-		E462BEFF25EA1A4700891B12 /* UIFont+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = E462BEFE25EA1A4700891B12 /* UIFont+Ext.swift */; };
-		E462BF0425EA1A5E00891B12 /* UITextField+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = E462BF0325EA1A5E00891B12 /* UITextField+Ext.swift */; };
-		E46415A125EB476400C84A73 /* TextSizeViewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E46415A025EB476400C84A73 /* TextSizeViewView.swift */; };
-		E46415A625EB477700C84A73 /* TextSizeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E46415A525EB477700C84A73 /* TextSizeView.xib */; };
 		E46415C125EB5C2400C84A73 /* BaseNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E46415C025EB5C2400C84A73 /* BaseNavigationController.swift */; };
 		E46415C625EB5CF800C84A73 /* UIView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = E46415C525EB5CF800C84A73 /* UIView+Ext.swift */; };
 		E46415E625EB759C00C84A73 /* DialogViewPresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E46415E525EB759C00C84A73 /* DialogViewPresentable.swift */; };
-		E46415EB25EB820D00C84A73 /* TextSizeEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E46415EA25EB820D00C84A73 /* TextSizeEditor.swift */; };
 		E46415F025EB8DA900C84A73 /* saigon_weather.json in Resources */ = {isa = PBXBuildFile; fileRef = E46415EF25EB8DA900C84A73 /* saigon_weather.json */; };
-		E46415FB25EB956600C84A73 /* BaseFontEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E46415FA25EB956600C84A73 /* BaseFontEditor.swift */; };
 		E464160725EBA0E200C84A73 /* LocalDatabaseServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E464160625EBA0E200C84A73 /* LocalDatabaseServiceTests.swift */; };
 		E464160F25EBA11400C84A73 /* WeatherViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E464160E25EBA11400C84A73 /* WeatherViewModelTests.swift */; };
 		E464163025EBA62800C84A73 /* ApiServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E464162F25EBA62800C84A73 /* ApiServiceTests.swift */; };
@@ -144,18 +137,11 @@
 		E462BEB225EA116900891B12 /* Date+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Ext.swift"; sourceTree = "<group>"; };
 		E462BEE925EA18BD00891B12 /* WeatherViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherViewModel.swift; sourceTree = "<group>"; };
 		E462BEF125EA198C00891B12 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
-		E462BEF925EA1A0A00891B12 /* UILabel+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Ext.swift"; sourceTree = "<group>"; };
-		E462BEFE25EA1A4700891B12 /* UIFont+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Ext.swift"; sourceTree = "<group>"; };
-		E462BF0325EA1A5E00891B12 /* UITextField+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Ext.swift"; sourceTree = "<group>"; };
-		E46415A025EB476400C84A73 /* TextSizeViewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextSizeViewView.swift; sourceTree = "<group>"; };
-		E46415A525EB477700C84A73 /* TextSizeView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TextSizeView.xib; sourceTree = "<group>"; };
 		E46415C025EB5C2400C84A73 /* BaseNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseNavigationController.swift; sourceTree = "<group>"; };
 		E46415C525EB5CF800C84A73 /* UIView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Ext.swift"; sourceTree = "<group>"; };
 		E46415E525EB759C00C84A73 /* DialogViewPresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DialogViewPresentable.swift; sourceTree = "<group>"; };
-		E46415EA25EB820D00C84A73 /* TextSizeEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextSizeEditor.swift; sourceTree = "<group>"; };
 		E46415EF25EB8DA900C84A73 /* saigon_weather.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = saigon_weather.json; sourceTree = "<group>"; };
 		E46415F425EB8DCD00C84A73 /* ApiServiceMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiServiceMock.swift; sourceTree = "<group>"; };
-		E46415FA25EB956600C84A73 /* BaseFontEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseFontEditor.swift; sourceTree = "<group>"; };
 		E464160625EBA0E200C84A73 /* LocalDatabaseServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalDatabaseServiceTests.swift; sourceTree = "<group>"; };
 		E464160E25EBA11400C84A73 /* WeatherViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherViewModelTests.swift; sourceTree = "<group>"; };
 		E464162F25EBA62800C84A73 /* ApiServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiServiceTests.swift; sourceTree = "<group>"; };
@@ -266,12 +252,10 @@
 			children = (
 				E42CC7D225EBDD1B003F06CE /* .swiftlint.yml */,
 				E4532C9B25EA4CFF002B7E55 /* Configuration */,
+				E4DAE7AC2C63D5B400D8EB24 /* DependencyContainer */,
 				E462BEA825EA0A8400891B12 /* ApiService */,
-				E4DAE7BA2C63F46600D8EB24 /* RequestFactory */,
 				E462BEA525EA09F900891B12 /* Model */,
 				E462BEA725EA0A6F00891B12 /* Controllers */,
-				E46415F925EB952200C84A73 /* Decorator */,
-				E4DAE7AC2C63D5B400D8EB24 /* DependencyContainer */,
 				E46415D625EB6B0500C84A73 /* LocalStorage */,
 				E462BEBF25EA15A600891B12 /* Utils */,
 				E462BE4325E9F8C200891B12 /* Info.plist */,
@@ -341,6 +325,7 @@
 			isa = PBXGroup;
 			children = (
 				E4532C8F25EA4C0D002B7E55 /* Core */,
+				E4DAE7BA2C63F46600D8EB24 /* RequestFactory */,
 				E4532C5125EA272F002B7E55 /* ApiServiceType.swift */,
 				E4532C3F25EA1F12002B7E55 /* ApiService.swift */,
 				E4532C5925EA2897002B7E55 /* Endpoint.swift */,
@@ -351,11 +336,7 @@
 		E462BEBF25EA15A600891B12 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				E46415CA25EB631700C84A73 /* TextSizeView */,
 				E462BEB225EA116900891B12 /* Date+Ext.swift */,
-				E462BEF925EA1A0A00891B12 /* UILabel+Ext.swift */,
-				E462BEFE25EA1A4700891B12 /* UIFont+Ext.swift */,
-				E462BF0325EA1A5E00891B12 /* UITextField+Ext.swift */,
 				E454F9E125EA8A93006A3640 /* Data+Ext.swift */,
 				E454F9E625EA8B2F006A3640 /* Logger.swift */,
 				E454F9EE25EA9791006A3640 /* NumberFormatter.swift */,
@@ -395,15 +376,6 @@
 			path = Weather;
 			sourceTree = "<group>";
 		};
-		E46415CA25EB631700C84A73 /* TextSizeView */ = {
-			isa = PBXGroup;
-			children = (
-				E46415A025EB476400C84A73 /* TextSizeViewView.swift */,
-				E46415A525EB477700C84A73 /* TextSizeView.xib */,
-			);
-			path = TextSizeView;
-			sourceTree = "<group>";
-		};
 		E46415D625EB6B0500C84A73 /* LocalStorage */ = {
 			isa = PBXGroup;
 			children = (
@@ -411,15 +383,6 @@
 				E4DAE7B62C63E3B000D8EB24 /* RealmMigration.swift */,
 			);
 			path = LocalStorage;
-			sourceTree = "<group>";
-		};
-		E46415F925EB952200C84A73 /* Decorator */ = {
-			isa = PBXGroup;
-			children = (
-				E46415EA25EB820D00C84A73 /* TextSizeEditor.swift */,
-				E46415FA25EB956600C84A73 /* BaseFontEditor.swift */,
-			);
-			path = Decorator;
 			sourceTree = "<group>";
 		};
 		E464160525EBA0C000C84A73 /* LocalDatabaseService */ = {
@@ -638,7 +601,6 @@
 				E42CC7D425EBDD1B003F06CE /* .swiftlint.yml in Resources */,
 				E462BE4225E9F8C200891B12 /* LaunchScreen.storyboard in Resources */,
 				E462BE3F25E9F8C200891B12 /* Assets.xcassets in Resources */,
-				E46415A625EB477700C84A73 /* TextSizeView.xib in Resources */,
 				E475E2732C615323009B86C5 /* SquareItemCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -795,12 +757,10 @@
 				E4DAE7992C637A9600D8EB24 /* City.swift in Sources */,
 				E462BE7525EA059900891B12 /* QueryWeatherResponse.swift in Sources */,
 				E4DAE79D2C63BF0A00D8EB24 /* Wind.swift in Sources */,
-				E46415FB25EB956600C84A73 /* BaseFontEditor.swift in Sources */,
 				E4532C8B25EA4BD7002B7E55 /* HTTPRequest.swift in Sources */,
 				E4DAE7B22C63D64A00D8EB24 /* Resolver.swift in Sources */,
 				E4532C5225EA272F002B7E55 /* ApiServiceType.swift in Sources */,
 				E4532C4825EA2667002B7E55 /* BaseError.swift in Sources */,
-				E462BEFA25EA1A0A00891B12 /* UILabel+Ext.swift in Sources */,
 				E454F9EF25EA9791006A3640 /* NumberFormatter.swift in Sources */,
 				E46415C125EB5C2400C84A73 /* BaseNavigationController.swift in Sources */,
 				E462BEB325EA116900891B12 /* Date+Ext.swift in Sources */,
@@ -818,16 +778,12 @@
 				E462BE3A25E9F8C100891B12 /* WeatherViewController.swift in Sources */,
 				E4DAE7972C635A1D00D8EB24 /* String+Ext.swift in Sources */,
 				E4DAE7A12C63BF3700D8EB24 /* Clouds.swift in Sources */,
-				E46415EB25EB820D00C84A73 /* TextSizeEditor.swift in Sources */,
 				E454F9E225EA8A93006A3640 /* Data+Ext.swift in Sources */,
 				E4DAE7A32C63BF4D00D8EB24 /* Sys.swift in Sources */,
 				E462BE7025EA00ED00891B12 /* WeatherDetail.swift in Sources */,
-				E462BEFF25EA1A4700891B12 /* UIFont+Ext.swift in Sources */,
 				E4DAE7AB2C63D53C00D8EB24 /* Container.swift in Sources */,
-				E46415A125EB476400C84A73 /* TextSizeViewView.swift in Sources */,
 				E46415E625EB759C00C84A73 /* DialogViewPresentable.swift in Sources */,
 				E475E2742C615323009B86C5 /* SquareItemCell.swift in Sources */,
-				E462BF0425EA1A5E00891B12 /* UITextField+Ext.swift in Sources */,
 				E4532C4025EA1F12002B7E55 /* ApiService.swift in Sources */,
 				E462BE3625E9F8C100891B12 /* AppDelegate.swift in Sources */,
 				E4DAE79B2C637B6200D8EB24 /* RealmDatabaseService.swift in Sources */,

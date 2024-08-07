@@ -52,18 +52,6 @@ extension UIView {
 }
 
 extension UIView {
-    func scaleUIElementsIfNeeded(in view: UIView) {
-        if #available(iOS 11.0, *) {
-            if view.isKind(of: UILabel.self) {
-                (view as? UILabel)?.scaled()
-            } else if view.isKind(of: UITextField.self) {
-                (view as? UITextField)?.scaled()
-            } else if !view.subviews.isEmpty {
-                view.subviews.forEach({ scaleUIElementsIfNeeded(in: $0) })
-            }
-        }
-    }
-    
     func addBlurBackgroundView() {
         let blurEffect = UIBlurEffect(style: .light)
         let blurEffectView = UIVisualEffectView(effect: blurEffect)

@@ -18,7 +18,7 @@ protocol DialogViewPresentable {
 
 extension DialogViewPresentable where Self: UIViewController {
     func show(
-        title: String = "Weather Forecast",
+        title: String = "Weather",
         message: String,
         closeHandler: (() -> Void)? = nil) {
         
