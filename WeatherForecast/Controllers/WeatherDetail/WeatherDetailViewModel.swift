@@ -9,18 +9,50 @@ import Foundation
 import UIKit
 
 protocol WeatherDetailViewModelType {
-    var item: QueryWeatherResponse { get }
+    var cityName: String { get }
+    var date: Date { get }
+    var desc: String { get }
+    var temp: Double { get }
+    var highestTemp: Double { get }
+    var lowestTemp: Double { get }
     var detailItems: [WeatherDetailItem] { get }
 }
 
 final class WeatherDetailViewModel: WeatherDetailViewModelType {
-    var item: QueryWeatherResponse
+    private let localStorage: LocalStorageType
+    private let item: QueryWeatherResponse
     
-    var detailItems: [WeatherDetailItem]
-    
-    init(item: QueryWeatherResponse) {
+    init(localStorage: LocalStorageType, item: QueryWeatherResponse) {
+        self.localStorage = localStorage
         self.item = item
-        self.detailItems = [
+    }
+    
+    var cityName: String {
+        item.cityName
+    }
+    
+    var date: Date {
+        item.date
+    }
+    
+    var desc: String {
+        item.weather.first?.desc ?? ""
+    }
+    
+    var temp: Double {
+        item.detail.temp
+    }
+    
+    var highestTemp: Double {
+        item.detail.tempMax
+    }
+    
+    var lowestTemp: Double {
+        item.detail.tempMin
+    }
+    
+    var detailItems: [WeatherDetailItem] {
+        let items: [WeatherDetailItem] = [
             SquareItem(
                 title: "SUNSET",
                 desc: item.sys.sunset.toString()
@@ -55,5 +87,10 @@ final class WeatherDetailViewModel: WeatherDetailViewModelType {
                 desc: "\(item.visibility.formatted(unit: UnitLength.meters))"
             )
         ]
+        return items
+    }
+    
+    func add() {
+        localStorage.create(City(id: item.cityId, name: item.cityName))
     }
 }

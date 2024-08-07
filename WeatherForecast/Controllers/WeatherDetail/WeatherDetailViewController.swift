@@ -77,13 +77,12 @@ class WeatherDetailViewController: BaseViewController {
     }
     
     private func layoutOverviewView() {
-        let item = viewModel.item
-        locationLabel.text = item.cityName
-        timeLabel.text = item.date.toString()
-        descLabel.text = item.weather.first?.desc.capitalized ?? ""
-        highestTempLabel.text = String(format: "H: %@", item.detail.tempMax.formatted(unit: UnitTemperature.celsius))
-        lowestTempLabel.text = String(format: "L: %@", item.detail.tempMin.formatted(unit: UnitTemperature.celsius))
-        tempLabel.text = item.detail.temp.formatted(unit: UnitTemperature.celsius)
+        locationLabel.text = viewModel.cityName
+        timeLabel.text = viewModel.date.toString()
+        descLabel.text = viewModel.desc.capitalized
+        highestTempLabel.text = String(format: "H: %@", viewModel.highestTemp.formatted(unit: UnitTemperature.celsius))
+        lowestTempLabel.text = String(format: "L: %@", viewModel.lowestTemp.formatted(unit: UnitTemperature.celsius))
+        tempLabel.text = viewModel.temp.formatted(unit: UnitTemperature.celsius)
     }
 }
 

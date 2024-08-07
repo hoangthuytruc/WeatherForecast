@@ -10,29 +10,24 @@ import UIKit
 class WeatherViewController: BaseViewController {
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     private var viewModel: WeatherViewModelType
-    private var timer: Timer?
+    private let vcFactory: ViewcontrollerFactory
         
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
     
-    init(viewModel: WeatherViewModelType) {
+    init(viewModel: WeatherViewModelType, vcFactory: ViewcontrollerFactory) {
         self.viewModel = viewModel
+        self.vcFactory = vcFactory
         super.init()
-    }
-    
-    override class func awakeFromNib() {
-        super.awakeFromNib()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Weather"
-        activityIndicator.isHidden = true
         
         tableView.register(
             UINib(nibName: String(describing: WeatherCell.self), bundle: nil),
@@ -42,7 +37,8 @@ class WeatherViewController: BaseViewController {
         tableView.delegate = self
         searchBar.delegate = self
         viewModel.delegate = self
-        viewModel.viewDidLoad()
+        
+        viewModel.getWeather()
     }
 }
 
@@ -62,28 +58,12 @@ extension WeatherViewController: UITableViewDataSource,
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let item = viewModel.items[indexPath.row]
-        let controller = WeatherDetailViewController(
-            viewModel: WeatherDetailViewModel(item: item)
-        )
+        let controller = vcFactory.makeWeatherDetailController(item: viewModel.items[indexPath.row])
         present(BaseNavigationController(rootViewController: controller), animated: true)
     }
 }
 
 extension WeatherViewController: WeatherViewModelDelegate {
-    func viewWillQueryWeather() {
-        DispatchQueue.main.async {
-            self.activityIndicator.isHidden = false
-            self.activityIndicator.startAnimating()
-        }
-    }
-    
-    func viewDidQueryWeather() {
-        DispatchQueue.main.async {
-            self.activityIndicator.isHidden = true
-            self.activityIndicator.stopAnimating()
-        }
-    }
     func reloadData() {
         tableView.reloadData()
     }

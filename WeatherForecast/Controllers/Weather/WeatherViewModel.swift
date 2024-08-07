@@ -12,14 +12,11 @@ protocol WeatherViewModelType {
     var items: [QueryWeatherResponse] { get }
     var delegate: WeatherViewModelDelegate? { get set }
     
-    func viewDidLoad()
+    func getWeather()
     func searchWeather(at city: String)
 }
 
 protocol WeatherViewModelDelegate: AnyObject {
-    func viewWillQueryWeather()
-    func viewDidQueryWeather()
-    
     func reloadData()
     func showError(_ error: BaseError)
 }
@@ -27,13 +24,15 @@ protocol WeatherViewModelDelegate: AnyObject {
 final class WeatherViewModel: WeatherViewModelType {
     weak var delegate: WeatherViewModelDelegate?
     private let apiService: ApiServiceType
-    private let defaultCity: String
+    private let localStorage: LocalStorageType
+    
+    private var cities: [City]
     
     init(apiService: ApiServiceType,
-         defaultCity: String = "saigon") {
-        
+         localStorage: LocalStorageType) {
         self.apiService = apiService
-        self.defaultCity = defaultCity
+        self.localStorage = localStorage
+        self.cities = localStorage.readAll()
     }
     
     var items: [QueryWeatherResponse] = [] {
@@ -44,23 +43,34 @@ final class WeatherViewModel: WeatherViewModelType {
         }
     }
     
-    func viewDidLoad() {
-        queryWeather(at: defaultCity)
+    func getWeather() {
+        if cities.isEmpty {
+            queryWeather(at: "saigon") { [weak self] response in
+                self?.items.append(response)
+                self?.localStorage.create(City(id: response.cityId, name: response.cityName))
+            }
+        } else {
+            cities.forEach({
+                queryWeather(at: $0.name) { [weak self] response in
+                    self?.items.append(response)
+                }
+            })
+        }
     }
     
     func searchWeather(at city: String) {
-        queryWeather(at: city)
+        queryWeather(at: city) { [weak self] response in
+            self?.items.append(response)
+        }
     }
     
-    private func queryWeather(at city: String) {
+    private func queryWeather(at city: String, completion: @escaping ((QueryWeatherResponse) -> Void)) {
         apiService.queryWeather(at: city) { [weak self] (result) in
             switch result {
             case .success(let response):
-                self?.items.append(response)
-                self?.delegate?.viewDidQueryWeather()
+                completion(response)
                 
             case .failure(let error):
-                self?.delegate?.viewDidQueryWeather()
                 self?.delegate?.showError(error)
             }
         }

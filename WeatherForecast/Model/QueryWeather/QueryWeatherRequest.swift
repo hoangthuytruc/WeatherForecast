@@ -9,7 +9,6 @@ import Foundation
 
 struct QueryWeatherRequest: Encodable {
     let city: String
-    let pageSize: Int
     let appid: String
     let units: Units
     let language: Language

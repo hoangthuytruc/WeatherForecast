@@ -8,24 +8,27 @@
 import Foundation
 import RealmSwift
 
-protocol LocalDatabaseServiceType {
-
+protocol LocalStorageType {
+    func create(_ item: City)
+    func update(_ item: City)
+    func delete(_ item: City)
+    
+    func readAll() -> [City]
+    func deleteAll()
 }
 
-final class RealmDatabaseService: LocalDatabaseServiceType {
-    private let realm = try! Realm()
+final class RealmDatabaseService: LocalStorageType {
     
-    static var shared: RealmDatabaseService = {
-        let instance = RealmDatabaseService()
-        return instance
-    }()
+    private let realm: Realm
     
-    private init() { }
+    init(realm: Realm) {
+        self.realm = realm
+    }
     
     func create(_ item: City) {
         do {
             try realm.write {
-                let obj = LocalCity()
+                let obj = CityObject()
                 obj._id = item.id
                 obj.name = item.name
                 realm.add(obj)
@@ -35,18 +38,9 @@ final class RealmDatabaseService: LocalDatabaseServiceType {
         }
     }
     
-    func readAll() -> [City] {
-        let objects = realm.objects(LocalCity.self)
-        var cities = [City]()
-        objects.forEach({
-            cities.append(City(id: $0._id, name: $0.name))
-        })
-        return cities
-    }
-    
     func update(_ item: City) {
         do {
-            let obj = realm.objects(LocalCity.self).first(where: { $0._id == item.id })
+            let obj = realm.objects(CityObject.self).first(where: { $0._id == item.id })
             try realm.write {
                 obj?.name = item.name
             }
@@ -57,10 +51,29 @@ final class RealmDatabaseService: LocalDatabaseServiceType {
     
     func delete(_ item: City) {
         do {
-            if let obj = realm.objects(LocalCity.self).first(where: { $0._id == item.id }) {
+            if let obj = realm.objects(CityObject.self).first(where: { $0._id == item.id }) {
                 try realm.write {
                     realm.delete(obj)
                 }
+            }
+        } catch {
+            print(error.localizedDescription)
+        }
+    }
+    
+    func readAll() -> [City] {
+        let objects = realm.objects(CityObject.self)
+        var cities = [City]()
+        objects.forEach({
+            cities.append(City(id: $0._id, name: $0.name))
+        })
+        return cities
+    }
+    
+    func deleteAll() {
+        do {
+            try realm.write {
+                realm.deleteAll()
             }
         } catch {
             print(error.localizedDescription)
