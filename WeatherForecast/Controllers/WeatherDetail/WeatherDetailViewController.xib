@@ -30,89 +30,57 @@
                     <rect key="frame" x="0.0" y="59" width="393" height="759"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gSF-kT-YBd">
-                            <rect key="frame" x="0.0" y="0.0" width="393" height="596.33333333333337"/>
+                            <rect key="frame" x="0.0" y="0.0" width="393" height="596.66666666666663"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="nO3-Rc-zX5">
-                                    <rect key="frame" x="16" y="39.999999999999986" width="361" height="186.66666666666663"/>
+                                    <rect key="frame" x="16" y="40" width="361" height="187"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x6z-Ut-Yyo">
-                                            <rect key="frame" x="40.333333333333343" y="0.0" width="280.33333333333326" height="43"/>
-                                            <attributedString key="attributedText">
-                                                <fragment content="Ho Chi Minh City">
-                                                    <attributes>
-                                                        <font key="NSFont" size="36" name="HelveticaNeue-Medium"/>
-                                                        <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                                    </attributes>
-                                                </fragment>
-                                            </attributedString>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ho Chi Minh City" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x6z-Ut-Yyo">
+                                            <rect key="frame" x="47.333333333333343" y="0.0" width="266.66666666666663" height="43"/>
+                                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="36"/>
+                                            <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qmR-t0-PiW">
-                                            <rect key="frame" x="158" y="51" width="45.333333333333343" height="21.666666666666671"/>
-                                            <attributedString key="attributedText">
-                                                <fragment content="15:46">
-                                                    <attributes>
-                                                        <font key="NSFont" size="18" name="HelveticaNeue-Medium"/>
-                                                        <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                                    </attributes>
-                                                </fragment>
-                                            </attributedString>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="15:46" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qmR-t0-PiW">
+                                            <rect key="frame" x="157" y="51" width="47.333333333333343" height="21.666666666666671"/>
+                                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="18"/>
+                                            <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J1e-dz-8ee">
-                                            <rect key="frame" x="145" y="80.666666666666657" width="71.333333333333314" height="76.333333333333343"/>
-                                            <attributedString key="attributedText">
-                                                <fragment content="25">
-                                                    <attributes>
-                                                        <font key="NSFont" size="64" name="HelveticaNeue-Medium"/>
-                                                    </attributes>
-                                                </fragment>
-                                            </attributedString>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="25" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J1e-dz-8ee">
+                                            <rect key="frame" x="142.66666666666666" y="80.666666666666657" width="76" height="76.666666666666657"/>
+                                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="64"/>
+                                            <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YhR-QP-ThG">
-                                            <rect key="frame" x="120.66666666666666" y="165" width="119.66666666666666" height="21.666666666666657"/>
-                                            <attributedString key="attributedText">
-                                                <fragment content="Mostly Cloudy">
-                                                    <attributes>
-                                                        <font key="NSFont" size="18" name="HelveticaNeue-Medium"/>
-                                                    </attributes>
-                                                </fragment>
-                                            </attributedString>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mostly Cloudy" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YhR-QP-ThG">
+                                            <rect key="frame" x="121.66666666666666" y="165.33333333333331" width="118" height="21.666666666666657"/>
+                                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="18"/>
+                                            <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </stackView>
                                 <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="bxj-6U-ASs">
-                                    <rect key="frame" x="150.66666666666666" y="234.66666666666669" width="92" height="21.666666666666686"/>
+                                    <rect key="frame" x="149.33333333333334" y="235" width="94.333333333333343" height="21.666666666666686"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NmA-lP-Qr7">
-                                            <rect key="frame" x="0.0" y="0.0" width="43.333333333333336" height="21.666666666666668"/>
-                                            <attributedString key="attributedText">
-                                                <fragment content="H: 33">
-                                                    <attributes>
-                                                        <font key="NSFont" size="18" name="HelveticaNeue-Medium"/>
-                                                    </attributes>
-                                                </fragment>
-                                            </attributedString>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="H: 33" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NmA-lP-Qr7">
+                                            <rect key="frame" x="0.0" y="0.0" width="45" height="21.666666666666668"/>
+                                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="18"/>
+                                            <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ukk-ec-SKd">
-                                            <rect key="frame" x="51.333333333333343" y="0.0" width="40.666666666666657" height="21.666666666666668"/>
-                                            <attributedString key="attributedText">
-                                                <fragment content="L: 24">
-                                                    <attributes>
-                                                        <font key="NSFont" size="18" name="HelveticaNeue-Medium"/>
-                                                    </attributes>
-                                                </fragment>
-                                            </attributedString>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="L: 24" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ukk-ec-SKd">
+                                            <rect key="frame" x="53" y="0.0" width="41.333333333333343" height="21.666666666666668"/>
+                                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="18"/>
+                                            <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
                                 </stackView>
                                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="UBx-zg-wy4">
-                                    <rect key="frame" x="16" y="296.33333333333331" width="361" height="299.99999999999994"/>
+                                    <rect key="frame" x="16" y="296.66666666666669" width="361" height="300.00000000000006"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
                                         <constraint firstAttribute="height" priority="999" constant="300" id="oNo-lk-Swh"/>
