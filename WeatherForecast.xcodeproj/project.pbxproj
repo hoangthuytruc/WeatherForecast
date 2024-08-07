@@ -226,7 +226,6 @@
 			children = (
 				E4532C8525EA4BC9002B7E55 /* HTTPMethod.swift */,
 				E4532C8A25EA4BD7002B7E55 /* HTTPRequest.swift */,
-				E4532C3F25EA1F12002B7E55 /* ApiService.swift */,
 				E4532C4725EA2667002B7E55 /* BaseError.swift */,
 				E4532C5E25EA294E002B7E55 /* BaseRequest.swift */,
 				E4532C9625EA4C64002B7E55 /* BaseResponse.swift */,
@@ -270,6 +269,7 @@
 				E42CC7D225EBDD1B003F06CE /* .swiftlint.yml */,
 				E4532C9B25EA4CFF002B7E55 /* Configuration */,
 				E462BEA825EA0A8400891B12 /* ApiService */,
+				E4DAE7BA2C63F46600D8EB24 /* RequestFactory */,
 				E462BEA525EA09F900891B12 /* Model */,
 				E462BEA725EA0A6F00891B12 /* Controllers */,
 				E46415F925EB952200C84A73 /* Decorator */,
@@ -307,6 +307,7 @@
 		E462BEA525EA09F900891B12 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				E4DAE7B92C63F43800D8EB24 /* LocalStorage */,
 				E462BEA625EA0A2D00891B12 /* QueryWeather */,
 			);
 			path = Model;
@@ -315,17 +316,15 @@
 		E462BEA625EA0A2D00891B12 /* QueryWeather */ = {
 			isa = PBXGroup;
 			children = (
+				E462BE7425EA059900891B12 /* QueryWeatherResponse.swift */,
 				E4DAE7A02C63BF3700D8EB24 /* Clouds.swift */,
 				E462BE8C25EA095D00891B12 /* Coordinate.swift */,
-				E4532C7D25EA4B0D002B7E55 /* QueryWeatherRequest.swift */,
-				E462BE7425EA059900891B12 /* QueryWeatherResponse.swift */,
 				E4DAE79E2C63BF2700D8EB24 /* Rain.swift */,
 				E4DAE7A22C63BF4D00D8EB24 /* Sys.swift */,
 				E4532C7025EA3271002B7E55 /* Units.swift */,
 				E462BEA025EA09DD00891B12 /* Weather.swift */,
 				E462BE6F25EA00ED00891B12 /* WeatherDetail.swift */,
 				E4DAE79C2C63BF0A00D8EB24 /* Wind.swift */,
-				E4DAE7A42C63C0AC00D8EB24 /* City.swift */,
 			);
 			path = QueryWeather;
 			sourceTree = "<group>";
@@ -345,8 +344,8 @@
 			children = (
 				E4532C8F25EA4C0D002B7E55 /* Core */,
 				E4532C5125EA272F002B7E55 /* ApiServiceType.swift */,
+				E4532C3F25EA1F12002B7E55 /* ApiService.swift */,
 				E4532C5925EA2897002B7E55 /* Endpoint.swift */,
-				E4532C6325EA2A3A002B7E55 /* RequestFactory.swift */,
 			);
 			path = ApiService;
 			sourceTree = "<group>";
@@ -410,7 +409,6 @@
 		E46415D625EB6B0500C84A73 /* LocalStorage */ = {
 			isa = PBXGroup;
 			children = (
-				E4DAE7B82C63E3CB00D8EB24 /* Model */,
 				E4DAE79A2C637B6200D8EB24 /* RealmDatabaseService.swift */,
 				E4DAE7B62C63E3B000D8EB24 /* RealmMigration.swift */,
 			);
@@ -495,12 +493,22 @@
 			path = DICore;
 			sourceTree = "<group>";
 		};
-		E4DAE7B82C63E3CB00D8EB24 /* Model */ = {
+		E4DAE7B92C63F43800D8EB24 /* LocalStorage */ = {
 			isa = PBXGroup;
 			children = (
 				E4DAE7982C637A9600D8EB24 /* CityObject.swift */,
+				E4DAE7A42C63C0AC00D8EB24 /* City.swift */,
 			);
-			path = Model;
+			path = LocalStorage;
+			sourceTree = "<group>";
+		};
+		E4DAE7BA2C63F46600D8EB24 /* RequestFactory */ = {
+			isa = PBXGroup;
+			children = (
+				E4532C6325EA2A3A002B7E55 /* RequestFactory.swift */,
+				E4532C7D25EA4B0D002B7E55 /* QueryWeatherRequest.swift */,
+			);
+			path = RequestFactory;
 			sourceTree = "<group>";
 		};
 		F5188555CA8701C378CED61D /* Pods */ = {
