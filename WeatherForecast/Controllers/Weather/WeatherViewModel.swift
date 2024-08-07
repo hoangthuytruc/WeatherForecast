@@ -27,15 +27,12 @@ protocol WeatherViewModelDelegate: AnyObject {
 final class WeatherViewModel: WeatherViewModelType {
     weak var delegate: WeatherViewModelDelegate?
     private let apiService: ApiServiceType
-    private let localDatabaseService: LocalDatabaseServiceType
     private let defaultCity: String
     
     init(apiService: ApiServiceType,
-         localDatabaseService: LocalDatabaseServiceType,
          defaultCity: String = "saigon") {
         
         self.apiService = apiService
-        self.localDatabaseService = localDatabaseService
         self.defaultCity = defaultCity
     }
     

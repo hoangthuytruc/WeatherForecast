@@ -17,14 +17,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window = UIWindow(frame: UIScreen.main.bounds)
         let viewController = WeatherViewController(
             viewModel: WeatherViewModel(
-                apiService: ApiService.shared,
-                localDatabaseService: LocalDatabaseService.shared
+                apiService: ApiService.shared
             )
         )
         self.window?.rootViewController = BaseNavigationController(rootViewController: viewController)
-        self.window?.makeKeyAndVisible()
-        
-        LocalDatabaseService.shared.clear()
+        self.window?.makeKeyAndVisible()        
         return true
     }
 }

@@ -7,59 +7,6 @@
 
 import Foundation
 
-struct Wind: Decodable {
-    let speed: Double
-    let deg: Double
-    let gust: Double?
-    
-    private enum CodingKeys: String, CodingKey {
-        case speed = "speed"
-        case deg = "deg"
-        case gust = "gust"
-    }
-}
-
-struct Rain: Decodable {
-    let lastHour: Double
-    
-    private enum CodingKeys: String, CodingKey {
-        case lastHour = "1h"
-    }
-}
-
-struct Clouds: Decodable {
-    let all: Double
-    
-    private enum CodingKeys: String, CodingKey {
-        case all = "all"
-    }
-}
-
-struct Sys: Decodable {
-    let type: Int
-    let id: Int
-    let country: String
-    private let sunriseTimeInterval: Int
-    private let sunsetTimeInternal: Int
-    
-    private enum CodingKeys: String, CodingKey {
-        case type = "type"
-        case id = "id"
-        case country = "country"
-        case sunriseTimeInterval = "sunrise"
-        case sunsetTimeInternal = "sunset"
-    }
-}
-
-extension Sys {
-    var sunrise: Date {
-        Date(timeIntervalSince1970: TimeInterval(sunriseTimeInterval))
-    }
-    var sunset: Date {
-        Date(timeIntervalSince1970: TimeInterval(sunsetTimeInternal))
-    }
-}
-
 struct QueryWeatherResponse: Decodable {
     let coord: Coordinate
     let weather: [Weather]
@@ -72,7 +19,7 @@ struct QueryWeatherResponse: Decodable {
     let dt: Int
     let sys: Sys
     let timezone: Int
-    let cityId: Double
+    let cityId: Int
     let cityName: String
     let cod: Int
     
