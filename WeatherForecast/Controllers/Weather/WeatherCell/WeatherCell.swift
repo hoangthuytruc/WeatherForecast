@@ -15,10 +15,11 @@ class WeatherCell: UITableViewCell {
     @IBOutlet weak var tempLabel: UILabel!
     @IBOutlet weak var highestTempLabel: UILabel!
     @IBOutlet weak var lowestTempLabel: UILabel!
+    @IBOutlet weak var blurView: UIView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        addBlurBackgroundView()
+        blurView.addBlurBackgroundView()
     }
     
     func configureCell(_ item: QueryWeatherResponse) {

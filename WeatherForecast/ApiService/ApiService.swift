@@ -7,12 +7,6 @@
 
 import Foundation
 
-protocol URLSessionProtocol {
-    func dataTask(with request: URLRequest, completionHandler: @escaping (Data?, URLResponse?, Error?) -> Void) -> URLSessionDataTask
-}
-
-extension URLSession: URLSessionProtocol {}
-
 final class ApiService: NSObject {
     private let host: String
     
@@ -20,7 +14,7 @@ final class ApiService: NSObject {
         self.host = host
     }
     
-    private lazy var session: URLSessionProtocol = URLSession(
+    private lazy var session: URLSession = URLSession(
         configuration: .default,
         delegate: self,
         delegateQueue: .main
