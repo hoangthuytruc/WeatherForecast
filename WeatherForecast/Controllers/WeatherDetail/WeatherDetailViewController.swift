@@ -106,17 +106,17 @@ extension WeatherDetailViewController: UICollectionViewDataSource,
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let item = viewModel.detailItems[indexPath.row]
         switch item {
-        case is SquareItem:
+        case let item as SquareItem:
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SquareItemCell", for: indexPath) as? SquareItemCell else {
                 return UICollectionViewCell()
             }
-            cell.configureCell(item as! SquareItem)
+            cell.configureCell(item)
             return cell
-        case is RetangleItem:
+        case let item as RetangleItem:
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "RetangleItemCell", for: indexPath) as? RetangleItemCell else {
                 return UICollectionViewCell()
             }
-            cell.configureCell(item as! RetangleItem)
+            cell.configureCell(item)
             return cell
         default:
             return UICollectionViewCell()
