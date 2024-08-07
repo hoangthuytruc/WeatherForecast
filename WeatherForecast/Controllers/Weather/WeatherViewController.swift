@@ -62,7 +62,7 @@ extension WeatherViewController: UITableViewDataSource,
         let controller = WeatherDetailViewController(
             viewModel: WeatherDetailViewModel(item: item)
         )
-        present(controller, animated: true)
+        present(UINavigationController(rootViewController: controller), animated: true)
     }
 }
 

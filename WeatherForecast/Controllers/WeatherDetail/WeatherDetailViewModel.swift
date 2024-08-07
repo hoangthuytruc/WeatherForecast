@@ -22,19 +22,19 @@ final class WeatherDetailViewModel: WeatherDetailViewModelType {
         self.detailItems = [
             WeatherInfoItem(
                 title: "Feels Like",
-                desc: item.detail.feelsLikes.toCelsius()
+                desc: item.detail.feelsLikes.formatted(unit: UnitTemperature.celsius)
             ),
             WeatherInfoItem(
                 title: "Humidity",
-                desc: "\(item.detail.humidity) %"
+                desc: "\(item.detail.humidity)%"
             ),
             WeatherInfoItem(
                 title: "Pressure",
-                desc: "\(item.detail.pressure) Pa"
+                desc: "\(item.detail.pressure.formatted(unit: UnitPressure.hectopascals))"
             ),
             WeatherInfoItem(
                 title: "Visibility",
-                desc: "\(item.visibility) m"
+                desc: "\(item.visibility.formatted(unit: UnitLength.meters))"
             ),
             WeatherInfoItem(
                 title: "Sunset",
@@ -45,12 +45,8 @@ final class WeatherDetailViewModel: WeatherDetailViewModelType {
                 desc: item.sys.sunrise.toString()
             ),
             WeatherInfoItem(
-                title: "Rain",
-                desc: "\(item.rain.lastHour) mm in last 1h"
-            ),
-            WeatherInfoItem(
                 title: "Wind",
-                desc: "Speed: \(item.wind.speed) m/s"
+                desc: "Speed: \(item.wind.speed.formatted(unit: UnitSpeed.milesPerHour))"
             ),
         ]
     }

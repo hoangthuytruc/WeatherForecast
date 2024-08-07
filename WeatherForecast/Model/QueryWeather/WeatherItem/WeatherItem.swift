@@ -12,10 +12,10 @@ struct WeatherItem: Decodable, Hashable {
     let tempMin: Double
     let tempMax: Double
     let feelsLikes: Double
-    let pressure: Int
+    let pressure: Double
     let humidity: Int
-    let seaLevel: Int
-    let grndLevel: Int
+    let seaLevel: Double
+    let grndLevel: Double
     
     private enum CodingKeys: String, CodingKey {
         case temp = "temp"

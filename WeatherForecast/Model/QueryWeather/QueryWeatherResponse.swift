@@ -8,9 +8,9 @@
 import Foundation
 
 struct Wind: Decodable {
-    let speed: Float
-    let deg: Float
-    let gust: Float?
+    let speed: Double
+    let deg: Double
+    let gust: Double?
     
     private enum CodingKeys: String, CodingKey {
         case speed = "speed"
@@ -20,7 +20,7 @@ struct Wind: Decodable {
 }
 
 struct Rain: Decodable {
-    let lastHour: Float
+    let lastHour: Double
     
     private enum CodingKeys: String, CodingKey {
         case lastHour = "1h"
@@ -28,7 +28,7 @@ struct Rain: Decodable {
 }
 
 struct Clouds: Decodable {
-    let all: Int
+    let all: Double
     
     private enum CodingKeys: String, CodingKey {
         case all = "all"
@@ -65,7 +65,7 @@ struct QueryWeatherResponse: Decodable {
     let weather: [Weather]
     let base: String
     let detail: WeatherItem
-    let visibility: Int
+    let visibility: Double
     let wind: Wind
     let rain: Rain
     let clouds: Clouds

@@ -42,6 +42,19 @@ class WeatherDetailViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationItem.leftBarButtonItem = UIBarButtonItem(
+            title: "Cancel",
+            style: .plain,
+            target: self,
+            action: #selector(close)
+        )
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(
+            title: "Add",
+            style: .plain,
+            target: self,
+            action: #selector(add)
+        )
         collectionView.register(
             UINib(nibName: String(describing: ItemCell.self), bundle: nil),
             forCellWithReuseIdentifier: "ItemCell"
@@ -55,14 +68,22 @@ class WeatherDetailViewController: BaseViewController {
         collectionView.reloadData()
     }
     
+    @objc func close() {
+        dismiss(animated: true)
+    }
+    
+    @objc func add() {
+        
+    }
+    
     private func layoutOverviewView() {
         let item = viewModel.item
         locationLabel.text = item.cityName
         timeLabel.text = item.date.toString()
         descLabel.text = item.weather.first?.desc.capitalized ?? ""
-        highestTempLabel.text = String(format: "H: %@", item.detail.tempMax.toCelsius())
-        lowestTempLabel.text = String(format: "L: %@", item.detail.tempMin.toCelsius())
-        tempLabel.text = item.detail.temp.toCelsius()
+        highestTempLabel.text = String(format: "H: %@", item.detail.tempMax.formatted(unit: UnitTemperature.celsius))
+        lowestTempLabel.text = String(format: "L: %@", item.detail.tempMin.formatted(unit: UnitTemperature.celsius))
+        tempLabel.text = item.detail.temp.formatted(unit: UnitTemperature.celsius)
     }
 }
 
