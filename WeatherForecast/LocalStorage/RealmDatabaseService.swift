@@ -10,6 +10,7 @@ import RealmSwift
 
 protocol LocalStorageType {
     func create(_ item: City)
+    func read(_ id: Int) -> City?
     func update(_ item: City)
     func delete(_ item: City)
     
@@ -31,6 +32,10 @@ final class RealmDatabaseService: LocalStorageType {
     }
     
     func create(_ item: City) {
+        guard read(item.id) == nil else {
+            return
+        }
+        
         do {
             try realm.write {
                 let obj = CityObject()
@@ -41,6 +46,12 @@ final class RealmDatabaseService: LocalStorageType {
         } catch {
             print(error.localizedDescription)
         }
+    }
+    
+    func read(_ id: Int) -> City? {
+        let object = realm.objects(CityObject.self)
+            .first(where: { $0._id == id })
+        return object == nil ? nil : City(id: object!._id, name: object!.name)
     }
     
     func update(_ item: City) {
@@ -73,11 +84,15 @@ final class RealmDatabaseService: LocalStorageType {
         
         token = objects.observe { [weak self] changes in
             switch changes {
-            case .initial(let collectionType):
+            case .initial(_):
                 break
-            case .update(let collectionType, let deletions, let insertions, let modifications):
-                if let newIdx = insertions.first, let newObj = self?.readAll()[newIdx] {
-                    completion(newObj)
+            case .update(_, _, let insertions, _):
+                if let newIdx = insertions.first,
+                    let newObjects = self?.realm.objects(CityObject.self) {
+                    if newObjects.count > newIdx {
+                        let newObject = newObjects[newIdx]
+                        completion(City(id: newObject._id, name: newObject.name))
+                    }
                 }
             case .error(let error):
                 print(error.localizedDescription)

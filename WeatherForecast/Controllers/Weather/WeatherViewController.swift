@@ -39,7 +39,6 @@ class WeatherViewController: BaseViewController {
         viewModel.delegate = self
         
         viewModel.getWeather()
-        viewModel.observeChanges()
     }
     
     deinit {
@@ -83,5 +82,9 @@ extension WeatherViewController: UISearchBarDelegate {
         if let text = searchBar.text, !text.isEmpty {
             viewModel.searchWeather(at: text)
         }
+    }
+    
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        viewModel.observeChanges()
     }
 }

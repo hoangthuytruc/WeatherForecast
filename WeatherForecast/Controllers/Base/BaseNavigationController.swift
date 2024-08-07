@@ -12,6 +12,7 @@ class BaseNavigationController: UINavigationController {
     override func viewDidLoad() {
         super.viewDidLoad()
         let backgroundView = UIImageView(image: UIImage(named: "backgroundImage"))
+        backgroundView.translatesAutoresizingMaskIntoConstraints = false
         backgroundView.contentMode = .scaleAspectFill
         backgroundView.frame = view.frame
         view.addSubview(backgroundView)
