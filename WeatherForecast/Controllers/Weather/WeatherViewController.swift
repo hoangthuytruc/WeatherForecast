@@ -25,6 +25,10 @@ class WeatherViewController: BaseViewController {
         super.init()
     }
     
+    override class func awakeFromNib() {
+        super.awakeFromNib()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Weather"
@@ -62,7 +66,7 @@ extension WeatherViewController: UITableViewDataSource,
         let controller = WeatherDetailViewController(
             viewModel: WeatherDetailViewModel(item: item)
         )
-        present(UINavigationController(rootViewController: controller), animated: true)
+        present(BaseNavigationController(rootViewController: controller), animated: true)
     }
 }
 

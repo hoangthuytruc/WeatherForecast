@@ -7,24 +7,27 @@
 
 import UIKit
 
-struct WeatherInfoItem {
+protocol WeatherDetailItem {
+    var title: String { get }
+}
+
+struct SquareItem: WeatherDetailItem {
     let title: String
     let desc: String
 }
 
-class ItemCell: UICollectionViewCell {
+class SquareItemCell: UICollectionViewCell {
 
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var descLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        addBlurBackgroundView()
     }
     
-    func configureCell(_ item: WeatherInfoItem) {
+    func configureCell(_ item: SquareItem) {
         titleLabel.text = item.title
         descLabel.text = item.desc
     }
-
 }

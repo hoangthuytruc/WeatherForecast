@@ -6,48 +6,54 @@
 //
 
 import Foundation
+import UIKit
 
 protocol WeatherDetailViewModelType {
     var item: QueryWeatherResponse { get }
-    var detailItems: [WeatherInfoItem] { get }
+    var detailItems: [WeatherDetailItem] { get }
 }
 
 final class WeatherDetailViewModel: WeatherDetailViewModelType {
     var item: QueryWeatherResponse
     
-    var detailItems: [WeatherInfoItem]
+    var detailItems: [WeatherDetailItem]
     
     init(item: QueryWeatherResponse) {
         self.item = item
         self.detailItems = [
-            WeatherInfoItem(
-                title: "Feels Like",
-                desc: item.detail.feelsLikes.formatted(unit: UnitTemperature.celsius)
-            ),
-            WeatherInfoItem(
-                title: "Humidity",
-                desc: "\(item.detail.humidity)%"
-            ),
-            WeatherInfoItem(
-                title: "Pressure",
-                desc: "\(item.detail.pressure.formatted(unit: UnitPressure.hectopascals))"
-            ),
-            WeatherInfoItem(
-                title: "Visibility",
-                desc: "\(item.visibility.formatted(unit: UnitLength.meters))"
-            ),
-            WeatherInfoItem(
-                title: "Sunset",
+            SquareItem(
+                title: "SUNSET",
                 desc: item.sys.sunset.toString()
             ),
-            WeatherInfoItem(
-                title: "Sunrise",
+            SquareItem(
+                title: "SUNRISE",
                 desc: item.sys.sunrise.toString()
             ),
-            WeatherInfoItem(
-                title: "Wind",
-                desc: "Speed: \(item.wind.speed.formatted(unit: UnitSpeed.milesPerHour))"
+            SquareItem(
+                title: "FEELS LIKE",
+                desc: item.detail.feelsLikes.formatted(unit: UnitTemperature.celsius)
             ),
+            SquareItem(
+                title: "HUMIDITY",
+                desc: "\(item.detail.humidity)%"
+            ),
+            RetangleItem(
+                title: "WIND",
+                desc: AttributedStringBuilder()
+                    .append("Speed: ", attributes: [.font: UIFont.systemFont(ofSize: 14, weight: .regular)])
+                    .append(item.wind.speed.formatted(unit: UnitSpeed.milesPerHour), attributes: [.font: UIFont.systemFont(ofSize: 24, weight: .medium)])
+                    .build()
+            ),
+            RetangleItem(
+                title: "PRESSURE",
+                desc: AttributedStringBuilder()
+                    .append(item.detail.pressure.formatted(unit: UnitPressure.hectopascals), attributes: [.font: UIFont.systemFont(ofSize: 24, weight: .medium)])
+                    .build()
+            ),
+            SquareItem(
+                title: "VISIBILITY",
+                desc: "\(item.visibility.formatted(unit: UnitLength.meters))"
+            )
         ]
     }
 }

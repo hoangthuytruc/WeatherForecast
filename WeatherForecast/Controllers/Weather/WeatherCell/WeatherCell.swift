@@ -18,6 +18,7 @@ class WeatherCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        addBlurBackgroundView()
     }
     
     func configureCell(_ item: QueryWeatherResponse) {

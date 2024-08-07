@@ -5,7 +5,6 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22685"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -31,7 +30,7 @@
                     <rect key="frame" x="0.0" y="59" width="393" height="759"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gSF-kT-YBd">
-                            <rect key="frame" x="0.0" y="0.0" width="393" height="376.33333333333331"/>
+                            <rect key="frame" x="0.0" y="0.0" width="393" height="596.33333333333337"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="nO3-Rc-zX5">
                                     <rect key="frame" x="16" y="39.999999999999986" width="361" height="186.66666666666663"/>
@@ -83,6 +82,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </stackView>
                                 <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="bxj-6U-ASs">
                                     <rect key="frame" x="150.66666666666666" y="234.66666666666669" width="92" height="21.666666666666686"/>
@@ -112,10 +112,10 @@
                                     </subviews>
                                 </stackView>
                                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="UBx-zg-wy4">
-                                    <rect key="frame" x="16" y="276.33333333333331" width="361" height="100"/>
-                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                    <rect key="frame" x="16" y="296.33333333333331" width="361" height="299.99999999999994"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
-                                        <constraint firstAttribute="height" constant="100" id="oNo-lk-Swh"/>
+                                        <constraint firstAttribute="height" priority="999" constant="300" id="oNo-lk-Swh"/>
                                     </constraints>
                                     <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="8" minimumInteritemSpacing="8" id="bLN-BA-qAi">
                                         <size key="itemSize" width="120" height="120"/>
@@ -125,12 +125,12 @@
                                     </collectionViewFlowLayout>
                                 </collectionView>
                             </subviews>
-                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
                                 <constraint firstAttribute="trailing" secondItem="UBx-zg-wy4" secondAttribute="trailing" constant="16" id="0CZ-IE-II0"/>
                                 <constraint firstItem="bxj-6U-ASs" firstAttribute="top" secondItem="nO3-Rc-zX5" secondAttribute="bottom" constant="8" id="LYM-g4-qBW"/>
                                 <constraint firstItem="nO3-Rc-zX5" firstAttribute="leading" secondItem="gSF-kT-YBd" secondAttribute="leading" constant="16" id="QhD-ge-bdO"/>
-                                <constraint firstItem="UBx-zg-wy4" firstAttribute="top" secondItem="bxj-6U-ASs" secondAttribute="bottom" constant="20" id="X3a-fd-IvW"/>
+                                <constraint firstItem="UBx-zg-wy4" firstAttribute="top" secondItem="bxj-6U-ASs" secondAttribute="bottom" constant="40" id="X3a-fd-IvW"/>
                                 <constraint firstAttribute="trailing" secondItem="nO3-Rc-zX5" secondAttribute="trailing" constant="16" id="YTE-m5-gf1"/>
                                 <constraint firstAttribute="bottom" secondItem="UBx-zg-wy4" secondAttribute="bottom" id="e00-EB-tNO"/>
                                 <constraint firstItem="nO3-Rc-zX5" firstAttribute="top" secondItem="gSF-kT-YBd" secondAttribute="top" constant="40" id="mNk-8U-Lyp"/>
@@ -139,6 +139,7 @@
                             </constraints>
                         </view>
                     </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstAttribute="bottom" secondItem="gSF-kT-YBd" secondAttribute="bottom" id="0TN-NO-Eln"/>
                         <constraint firstItem="gSF-kT-YBd" firstAttribute="leading" secondItem="b43-b6-VzK" secondAttribute="leading" id="Hk7-wF-p0Z"/>
@@ -148,7 +149,7 @@
                 </scrollView>
             </subviews>
             <viewLayoutGuide key="safeArea" id="l8E-fn-rEe"/>
-            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="gSF-kT-YBd" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" id="1Vc-Lc-Sjy"/>
                 <constraint firstItem="l8E-fn-rEe" firstAttribute="trailing" secondItem="b43-b6-VzK" secondAttribute="trailing" id="31f-BB-zfg"/>
@@ -160,9 +161,4 @@
             <point key="canvasLocation" x="-21" y="20"/>
         </view>
     </objects>
-    <resources>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-    </resources>
 </document>

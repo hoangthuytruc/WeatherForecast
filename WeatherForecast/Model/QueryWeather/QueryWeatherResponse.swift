@@ -67,7 +67,7 @@ struct QueryWeatherResponse: Decodable {
     let detail: WeatherItem
     let visibility: Double
     let wind: Wind
-    let rain: Rain
+    let rain: Rain?
     let clouds: Clouds
     let dt: Int
     let sys: Sys
