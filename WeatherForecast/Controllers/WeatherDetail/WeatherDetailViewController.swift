@@ -20,6 +20,7 @@ class WeatherDetailViewController: BaseViewController {
     
     private var viewModel: WeatherDetailViewModelType
     private var contentSizeObservation: NSKeyValueObservation?
+    private var dataSource: WeatherDetailDataSource?
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -52,6 +53,8 @@ class WeatherDetailViewController: BaseViewController {
             )
         }
         
+        layoutOverviewView()
+        
         collectionView.register(
             UINib(nibName: String(describing: SquareItemCell.self), bundle: nil),
             forCellWithReuseIdentifier: "SquareItemCell"
@@ -60,14 +63,15 @@ class WeatherDetailViewController: BaseViewController {
             UINib(nibName: String(describing: RetangleItemCell.self), bundle: nil),
             forCellWithReuseIdentifier: "RetangleItemCell"
         )
-        collectionView.dataSource = self
-        collectionView.delegate = self
+        dataSource = WeatherDetailDataSource(items: viewModel.detailItems)
+        collectionView.dataSource = dataSource
+        collectionView.delegate = dataSource
         contentSizeObservation = collectionView.observe(\.contentSize, options: [.new, .old]) { [weak self] (collectionView, change) in
             if let newSize = change.newValue {
                 self?.collectionViewHeightConstraint.constant = newSize.height
             }
         }
-        layoutOverviewView()
+       
         collectionView.reloadData()
     }
     
@@ -92,59 +96,5 @@ class WeatherDetailViewController: BaseViewController {
     
     deinit {
         contentSizeObservation?.invalidate()
-    }
-}
-
-// MARK: - UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout
-extension WeatherDetailViewController: UICollectionViewDataSource,
-                                        UICollectionViewDelegate,
-                                        UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        viewModel.detailItems.count
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let item = viewModel.detailItems[indexPath.row]
-        switch item {
-        case let item as SquareItem:
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SquareItemCell", for: indexPath) as? SquareItemCell else {
-                return UICollectionViewCell()
-            }
-            cell.configureCell(item)
-            return cell
-        case let item as RetangleItem:
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "RetangleItemCell", for: indexPath) as? RetangleItemCell else {
-                return UICollectionViewCell()
-            }
-            cell.configureCell(item)
-            return cell
-        default:
-            return UICollectionViewCell()
-        }
-        
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let itemsPerRow: CGFloat = 2
-        let collectionViewFrame: CGFloat = UIScreen.main.bounds.width
-        let margin: CGFloat = 16
-        let padding: CGFloat = 8
-        let halfSize: CGFloat = floor((collectionViewFrame - padding - (2 * margin)) / itemsPerRow)
-        let fullSize: CGFloat = floor(collectionViewFrame - (2 * margin))
-        
-        let item = viewModel.detailItems[indexPath.row]
-        switch item {
-        case is SquareItem:
-            let titleHeight = item.title.estimateHeight(for: UIFont.systemFont(ofSize: 14), width: halfSize)
-            let descHeight = (item as! SquareItem).desc.estimateHeight(for: UIFont.systemFont(ofSize: 36), width: halfSize)
-            return CGSize(width: halfSize, height: titleHeight + descHeight + padding * 2)
-        case is RetangleItem:
-            let titleHeight = item.title.estimateHeight(for: UIFont.systemFont(ofSize: 14), width: fullSize)
-            let descHeight = (item as! RetangleItem).desc.string.estimateHeight(for: UIFont.systemFont(ofSize: 36), width: fullSize)
-            return CGSize(width: fullSize, height: titleHeight + descHeight + padding * 2)
-        default:
-            return .zero
-        }
-        
     }
 }
