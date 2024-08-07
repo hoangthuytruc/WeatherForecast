@@ -7,6 +7,7 @@ target 'WeatherForecast' do
 
   # Pods for WeatherForecast
   pod 'SwiftLint'
+  pod 'RealmSwift'
 
   target 'WeatherForecastTests' do
     inherit! :search_paths
