@@ -21,7 +21,7 @@ final class DependencyContainer: ViewcontrollerFactory {
     private init() {
         self.container = Container()
             .register(ApiServiceType.self, instance: ApiService(host: "api.openweathermap.org"))
-            .register(LocalStorageType.self, instance: RealmDatabaseService(realm: try! Realm()))
+            .register(LocalStorageType.self, instance: RealmDatabaseService(realm: try! Realm(configuration: realmConfiguration)))
     }
     
     func makeWeatherListController() -> WeatherViewController {

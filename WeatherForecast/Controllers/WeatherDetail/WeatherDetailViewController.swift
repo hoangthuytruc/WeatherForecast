@@ -73,7 +73,9 @@ class WeatherDetailViewController: BaseViewController {
     }
     
     @objc func add() {
-        
+        viewModel.add() {
+            self.close()
+        }
     }
     
     private func layoutOverviewView() {

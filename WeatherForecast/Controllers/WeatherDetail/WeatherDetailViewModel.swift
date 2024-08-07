@@ -16,6 +16,8 @@ protocol WeatherDetailViewModelType {
     var highestTemp: Double { get }
     var lowestTemp: Double { get }
     var detailItems: [WeatherDetailItem] { get }
+    
+    func add(completion: @escaping () -> Void)
 }
 
 final class WeatherDetailViewModel: WeatherDetailViewModelType {
@@ -90,7 +92,7 @@ final class WeatherDetailViewModel: WeatherDetailViewModelType {
         return items
     }
     
-    func add() {
+    func add(completion: @escaping () -> Void) {
         localStorage.create(City(id: item.cityId, name: item.cityName))
     }
 }

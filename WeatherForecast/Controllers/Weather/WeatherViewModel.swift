@@ -14,6 +14,8 @@ protocol WeatherViewModelType {
     
     func getWeather()
     func searchWeather(at city: String)
+    func observeChanges()
+    func invalidateObservation()
 }
 
 protocol WeatherViewModelDelegate: AnyObject {
@@ -56,6 +58,18 @@ final class WeatherViewModel: WeatherViewModelType {
                 }
             })
         }
+    }
+    
+    func observeChanges() {
+        localStorage.observe { [weak self] newCity in
+            self?.queryWeather(at: newCity.name) { [weak self] response in
+                self?.items.append(response)
+            }
+        }
+    }
+    
+    func invalidateObservation() {
+        localStorage.invalidateObservation()
     }
     
     func searchWeather(at city: String) {

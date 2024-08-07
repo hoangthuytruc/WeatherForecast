@@ -13,6 +13,9 @@ protocol LocalStorageType {
     func update(_ item: City)
     func delete(_ item: City)
     
+    func observe(completion: @escaping (City) -> Void)
+    func invalidateObservation()
+    
     func readAll() -> [City]
     func deleteAll()
 }
@@ -20,6 +23,8 @@ protocol LocalStorageType {
 final class RealmDatabaseService: LocalStorageType {
     
     private let realm: Realm
+    
+    private var token: NotificationToken?
     
     init(realm: Realm) {
         self.realm = realm
@@ -59,6 +64,29 @@ final class RealmDatabaseService: LocalStorageType {
         } catch {
             print(error.localizedDescription)
         }
+    }
+    
+    func observe(completion: @escaping (City) -> Void) {
+        guard token == nil else { return }
+        
+        let objects = realm.objects(CityObject.self)
+        
+        token = objects.observe { [weak self] changes in
+            switch changes {
+            case .initial(let collectionType):
+                break
+            case .update(let collectionType, let deletions, let insertions, let modifications):
+                if let newIdx = insertions.first, let newObj = self?.readAll()[newIdx] {
+                    completion(newObj)
+                }
+            case .error(let error):
+                print(error.localizedDescription)
+            }
+        }
+    }
+    
+    func invalidateObservation() {
+        token?.invalidate()
     }
     
     func readAll() -> [City] {

@@ -39,6 +39,11 @@ class WeatherViewController: BaseViewController {
         viewModel.delegate = self
         
         viewModel.getWeather()
+        viewModel.observeChanges()
+    }
+    
+    deinit {
+        viewModel.invalidateObservation()
     }
 }
 
