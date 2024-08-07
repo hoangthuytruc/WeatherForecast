@@ -13,7 +13,7 @@ protocol WeatherViewModelType {
     var delegate: WeatherViewModelDelegate? { get set }
     
     func getWeather()
-    func searchWeather(at city: String)
+    func searchWeather(at city: String, completion: @escaping (QueryWeatherResponse) -> Void)
     func observeChanges()
     func invalidateObservation()
 }
@@ -72,16 +72,15 @@ final class WeatherViewModel: WeatherViewModelType {
         localStorage.invalidateObservation()
     }
     
-    func searchWeather(at city: String) {
-        queryWeather(at: city) { [weak self] response in
-            self?.items.append(response)
-        }
+    func searchWeather(at city: String, completion: @escaping (QueryWeatherResponse) -> Void) {
+        queryWeather(at: city) { completion($0) }
     }
     
     private func queryWeather(at city: String, completion: @escaping ((QueryWeatherResponse) -> Void)) {
         apiService.queryWeather(at: city) { [weak self] (result) in
             switch result {
             case .success(let response):
+                self?.localStorage.update(City(id: response.cityId, name: response.cityName))
                 completion(response)
                 
             case .failure(let error):

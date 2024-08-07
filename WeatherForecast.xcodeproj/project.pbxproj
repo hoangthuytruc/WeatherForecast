@@ -65,13 +65,12 @@
 		E4DAE7942C634BBD00D8EB24 /* RetangleItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4DAE7922C634BBD00D8EB24 /* RetangleItemCell.swift */; };
 		E4DAE7952C634BBD00D8EB24 /* RetangleItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E4DAE7932C634BBD00D8EB24 /* RetangleItemCell.xib */; };
 		E4DAE7972C635A1D00D8EB24 /* String+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4DAE7962C635A1D00D8EB24 /* String+Ext.swift */; };
-		E4DAE7992C637A9600D8EB24 /* CityObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4DAE7982C637A9600D8EB24 /* CityObject.swift */; };
+		E4DAE7992C637A9600D8EB24 /* City.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4DAE7982C637A9600D8EB24 /* City.swift */; };
 		E4DAE79B2C637B6200D8EB24 /* RealmDatabaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4DAE79A2C637B6200D8EB24 /* RealmDatabaseService.swift */; };
 		E4DAE79D2C63BF0A00D8EB24 /* Wind.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4DAE79C2C63BF0A00D8EB24 /* Wind.swift */; };
 		E4DAE79F2C63BF2700D8EB24 /* Rain.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4DAE79E2C63BF2700D8EB24 /* Rain.swift */; };
 		E4DAE7A12C63BF3700D8EB24 /* Clouds.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4DAE7A02C63BF3700D8EB24 /* Clouds.swift */; };
 		E4DAE7A32C63BF4D00D8EB24 /* Sys.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4DAE7A22C63BF4D00D8EB24 /* Sys.swift */; };
-		E4DAE7A52C63C0AC00D8EB24 /* City.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4DAE7A42C63C0AC00D8EB24 /* City.swift */; };
 		E4DAE7A92C63D1BF00D8EB24 /* DependencyContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4DAE7A82C63D1BF00D8EB24 /* DependencyContainer.swift */; };
 		E4DAE7AB2C63D53C00D8EB24 /* Container.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4DAE7AA2C63D53C00D8EB24 /* Container.swift */; };
 		E4DAE7AE2C63D5DB00D8EB24 /* AnyServiceFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4DAE7AD2C63D5DB00D8EB24 /* AnyServiceFactory.swift */; };
@@ -168,13 +167,12 @@
 		E4DAE7922C634BBD00D8EB24 /* RetangleItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RetangleItemCell.swift; sourceTree = "<group>"; };
 		E4DAE7932C634BBD00D8EB24 /* RetangleItemCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RetangleItemCell.xib; sourceTree = "<group>"; };
 		E4DAE7962C635A1D00D8EB24 /* String+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Ext.swift"; sourceTree = "<group>"; };
-		E4DAE7982C637A9600D8EB24 /* CityObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityObject.swift; sourceTree = "<group>"; };
+		E4DAE7982C637A9600D8EB24 /* City.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = City.swift; sourceTree = "<group>"; };
 		E4DAE79A2C637B6200D8EB24 /* RealmDatabaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmDatabaseService.swift; sourceTree = "<group>"; };
 		E4DAE79C2C63BF0A00D8EB24 /* Wind.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Wind.swift; sourceTree = "<group>"; };
 		E4DAE79E2C63BF2700D8EB24 /* Rain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rain.swift; sourceTree = "<group>"; };
 		E4DAE7A02C63BF3700D8EB24 /* Clouds.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Clouds.swift; sourceTree = "<group>"; };
 		E4DAE7A22C63BF4D00D8EB24 /* Sys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sys.swift; sourceTree = "<group>"; };
-		E4DAE7A42C63C0AC00D8EB24 /* City.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = City.swift; sourceTree = "<group>"; };
 		E4DAE7A82C63D1BF00D8EB24 /* DependencyContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DependencyContainer.swift; sourceTree = "<group>"; };
 		E4DAE7AA2C63D53C00D8EB24 /* Container.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Container.swift; sourceTree = "<group>"; };
 		E4DAE7AD2C63D5DB00D8EB24 /* AnyServiceFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyServiceFactory.swift; sourceTree = "<group>"; };
@@ -496,8 +494,7 @@
 		E4DAE7B92C63F43800D8EB24 /* LocalStorage */ = {
 			isa = PBXGroup;
 			children = (
-				E4DAE7982C637A9600D8EB24 /* CityObject.swift */,
-				E4DAE7A42C63C0AC00D8EB24 /* City.swift */,
+				E4DAE7982C637A9600D8EB24 /* City.swift */,
 			);
 			path = LocalStorage;
 			sourceTree = "<group>";
@@ -795,7 +792,7 @@
 				E4DAE7942C634BBD00D8EB24 /* RetangleItemCell.swift in Sources */,
 				E4DAE7B72C63E3B000D8EB24 /* RealmMigration.swift in Sources */,
 				E462BE8D25EA095D00891B12 /* Coordinate.swift in Sources */,
-				E4DAE7992C637A9600D8EB24 /* CityObject.swift in Sources */,
+				E4DAE7992C637A9600D8EB24 /* City.swift in Sources */,
 				E462BE7525EA059900891B12 /* QueryWeatherResponse.swift in Sources */,
 				E4DAE79D2C63BF0A00D8EB24 /* Wind.swift in Sources */,
 				E46415FB25EB956600C84A73 /* BaseFontEditor.swift in Sources */,
@@ -822,7 +819,6 @@
 				E4DAE7972C635A1D00D8EB24 /* String+Ext.swift in Sources */,
 				E4DAE7A12C63BF3700D8EB24 /* Clouds.swift in Sources */,
 				E46415EB25EB820D00C84A73 /* TextSizeEditor.swift in Sources */,
-				E4DAE7A52C63C0AC00D8EB24 /* City.swift in Sources */,
 				E454F9E225EA8A93006A3640 /* Data+Ext.swift in Sources */,
 				E4DAE7A32C63BF4D00D8EB24 /* Sys.swift in Sources */,
 				E462BE7025EA00ED00891B12 /* WeatherDetail.swift in Sources */,

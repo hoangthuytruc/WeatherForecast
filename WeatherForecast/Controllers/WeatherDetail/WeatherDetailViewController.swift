@@ -43,12 +43,15 @@ class WeatherDetailViewController: BaseViewController {
             action: #selector(close)
         )
         
-        navigationItem.rightBarButtonItem = UIBarButtonItem(
-            title: "Add",
-            style: .plain,
-            target: self,
-            action: #selector(add)
-        )
+        if !viewModel.isSavedCity {
+            navigationItem.rightBarButtonItem = UIBarButtonItem(
+                title: "Add",
+                style: .plain,
+                target: self,
+                action: #selector(add)
+            )
+        }
+        
         collectionView.register(
             UINib(nibName: String(describing: SquareItemCell.self), bundle: nil),
             forCellWithReuseIdentifier: "SquareItemCell"

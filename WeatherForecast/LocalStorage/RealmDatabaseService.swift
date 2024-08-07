@@ -38,8 +38,8 @@ final class RealmDatabaseService: LocalStorageType {
         
         do {
             try realm.write {
-                let obj = CityObject()
-                obj._id = item.id
+                let obj = City()
+                obj.id = item.id
                 obj.name = item.name
                 realm.add(obj)
             }
@@ -49,15 +49,16 @@ final class RealmDatabaseService: LocalStorageType {
     }
     
     func read(_ id: Int) -> City? {
-        let object = realm.objects(CityObject.self)
-            .first(where: { $0._id == id })
-        return object == nil ? nil : City(id: object!._id, name: object!.name)
+        let object = realm.objects(City.self)
+            .first(where: { $0.id == id })
+        return object == nil ? nil : City(id: object!.id, name: object!.name)
     }
     
     func update(_ item: City) {
         do {
-            let obj = realm.objects(CityObject.self).first(where: { $0._id == item.id })
+            let obj = realm.objects(City.self).first(where: { $0.id == item.id || $0.name == item.name })
             try realm.write {
+                obj?.id = item.id
                 obj?.name = item.name
             }
         } catch {
@@ -67,7 +68,7 @@ final class RealmDatabaseService: LocalStorageType {
     
     func delete(_ item: City) {
         do {
-            if let obj = realm.objects(CityObject.self).first(where: { $0._id == item.id }) {
+            if let obj = realm.objects(City.self).first(where: { $0.id == item.id }) {
                 try realm.write {
                     realm.delete(obj)
                 }
@@ -80,7 +81,7 @@ final class RealmDatabaseService: LocalStorageType {
     func observe(completion: @escaping (City) -> Void) {
         guard token == nil else { return }
         
-        let objects = realm.objects(CityObject.self)
+        let objects = realm.objects(City.self)
         
         token = objects.observe { [weak self] changes in
             switch changes {
@@ -88,10 +89,10 @@ final class RealmDatabaseService: LocalStorageType {
                 break
             case .update(_, _, let insertions, _):
                 if let newIdx = insertions.first,
-                    let newObjects = self?.realm.objects(CityObject.self) {
+                    let newObjects = self?.realm.objects(City.self) {
                     if newObjects.count > newIdx {
                         let newObject = newObjects[newIdx]
-                        completion(City(id: newObject._id, name: newObject.name))
+                        completion(City(id: newObject.id, name: newObject.name))
                     }
                 }
             case .error(let error):
@@ -105,10 +106,10 @@ final class RealmDatabaseService: LocalStorageType {
     }
     
     func readAll() -> [City] {
-        let objects = realm.objects(CityObject.self)
+        let objects = realm.objects(City.self)
         var cities = [City]()
         objects.forEach({
-            cities.append(City(id: $0._id, name: $0.name))
+            cities.append(City(id: $0.id, name: $0.name))
         })
         return cities
     }

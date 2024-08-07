@@ -9,6 +9,7 @@ import Foundation
 import UIKit
 
 protocol WeatherDetailViewModelType {
+    var isSavedCity: Bool { get }
     var cityName: String { get }
     var date: Date { get }
     var desc: String { get }
@@ -27,6 +28,11 @@ final class WeatherDetailViewModel: WeatherDetailViewModelType {
     init(localStorage: LocalStorageType, item: QueryWeatherResponse) {
         self.localStorage = localStorage
         self.item = item
+    }
+    
+    var isSavedCity: Bool {
+        let tmp = localStorage.read(item.cityId)
+        return localStorage.read(item.cityId) != nil
     }
     
     var cityName: String {
@@ -94,5 +100,6 @@ final class WeatherDetailViewModel: WeatherDetailViewModelType {
     
     func add(completion: @escaping () -> Void) {
         localStorage.create(City(id: item.cityId, name: item.cityName))
+        completion()
     }
 }

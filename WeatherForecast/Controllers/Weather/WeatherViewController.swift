@@ -41,6 +41,11 @@ class WeatherViewController: BaseViewController {
         viewModel.getWeather()
     }
     
+    fileprivate func presentWeatherDetailViewController(_ item: QueryWeatherResponse) {
+        let controller = vcFactory.makeWeatherDetailController(item: item)
+        present(BaseNavigationController(rootViewController: controller), animated: true)
+    }
+    
     deinit {
         viewModel.invalidateObservation()
     }
@@ -62,8 +67,7 @@ extension WeatherViewController: UITableViewDataSource,
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let controller = vcFactory.makeWeatherDetailController(item: viewModel.items[indexPath.row])
-        present(BaseNavigationController(rootViewController: controller), animated: true)
+        presentWeatherDetailViewController(viewModel.items[indexPath.row])
     }
 }
 
@@ -80,7 +84,9 @@ extension WeatherViewController: WeatherViewModelDelegate {
 extension WeatherViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         if let text = searchBar.text, !text.isEmpty {
-            viewModel.searchWeather(at: text)
+            viewModel.searchWeather(at: text) { [weak self] response in
+                self?.presentWeatherDetailViewController(response)
+            }
         }
     }
     
