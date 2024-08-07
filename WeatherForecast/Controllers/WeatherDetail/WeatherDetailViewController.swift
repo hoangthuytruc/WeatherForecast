@@ -71,6 +71,15 @@ class WeatherDetailViewController: BaseViewController {
         collectionView.reloadData()
     }
     
+    private func layoutOverviewView() {
+        locationLabel.text = viewModel.cityName
+        timeLabel.text = viewModel.date.toString()
+        descLabel.text = viewModel.desc.capitalized
+        highestTempLabel.text = String(format: "H: %@", viewModel.highestTemp.formatted(unit: UnitTemperature.celsius))
+        lowestTempLabel.text = String(format: "L: %@", viewModel.lowestTemp.formatted(unit: UnitTemperature.celsius))
+        tempLabel.text = viewModel.temp.formatted(unit: UnitTemperature.celsius)
+    }
+    
     @objc func close() {
         dismiss(animated: true)
     }
@@ -81,17 +90,13 @@ class WeatherDetailViewController: BaseViewController {
         }
     }
     
-    private func layoutOverviewView() {
-        locationLabel.text = viewModel.cityName
-        timeLabel.text = viewModel.date.toString()
-        descLabel.text = viewModel.desc.capitalized
-        highestTempLabel.text = String(format: "H: %@", viewModel.highestTemp.formatted(unit: UnitTemperature.celsius))
-        lowestTempLabel.text = String(format: "L: %@", viewModel.lowestTemp.formatted(unit: UnitTemperature.celsius))
-        tempLabel.text = viewModel.temp.formatted(unit: UnitTemperature.celsius)
+    deinit {
+        contentSizeObservation?.invalidate()
     }
 }
 
-extension WeatherDetailViewController: UICollectionViewDataSource, 
+// MARK: - UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout
+extension WeatherDetailViewController: UICollectionViewDataSource,
                                         UICollectionViewDelegate,
                                         UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
