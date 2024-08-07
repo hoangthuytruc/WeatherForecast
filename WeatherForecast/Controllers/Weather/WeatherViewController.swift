@@ -13,6 +13,7 @@ class WeatherViewController: BaseViewController {
     
     private var viewModel: WeatherViewModelType
     private let vcFactory: ViewcontrollerFactory
+    private var dataSource: WeatherDataSource?
         
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -33,10 +34,24 @@ class WeatherViewController: BaseViewController {
             UINib(nibName: String(describing: WeatherCell.self), bundle: nil),
             forCellReuseIdentifier: "Cell"
         )
-        tableView.dataSource = self
-        tableView.delegate = self
+        
+        dataSource = WeatherDataSource()
+        dataSource?.didSelectItemAt = {[weak self] item in
+            self?.presentWeatherDetailViewController(item)
+        }
+        dataSource?.didDeleteRowAt = {[weak self] idx in
+            self?.viewModel.removeCity(at: idx)
+        }
+        tableView.dataSource = dataSource
+        tableView.delegate = dataSource
+        
         searchBar.delegate = self
         viewModel.delegate = self
+        
+        viewModel.weatherItems = { [weak self] items in
+            self?.dataSource?.items = items
+            self?.tableView.reloadData()
+        }
         
         viewModel.getWeather()
     }
@@ -51,43 +66,14 @@ class WeatherViewController: BaseViewController {
     }
 }
 
-extension WeatherViewController: UITableViewDataSource,
-                                 UITableViewDelegate {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.items.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "Cell")
-            as? WeatherCell else {
-            return UITableViewCell()
-        }
-        cell.configureCell(viewModel.items[indexPath.row])
-        return cell
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        presentWeatherDetailViewController(viewModel.items[indexPath.row])
-    }
-    
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            viewModel.removeCity(at: indexPath.row)
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        }
-    }
-}
-
+// MARK: - WeatherViewModelDelegate
 extension WeatherViewController: WeatherViewModelDelegate {
-    func reloadData() {
-        tableView.reloadData()
-    }
-    
     func showError(_ error: BaseError) {
         show(message: error.localizedDescription)
     }
 }
 
+// MARK: - UISearchBarDelegate
 extension WeatherViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         if let text = searchBar.text, !text.isEmpty {

@@ -70,6 +70,7 @@
 		E4DAE7B02C63D61700D8EB24 /* BasicServiceFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4DAE7AF2C63D61700D8EB24 /* BasicServiceFactory.swift */; };
 		E4DAE7B22C63D64A00D8EB24 /* Resolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4DAE7B12C63D64A00D8EB24 /* Resolver.swift */; };
 		E4DAE7B72C63E3B000D8EB24 /* RealmMigration.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4DAE7B62C63E3B000D8EB24 /* RealmMigration.swift */; };
+		E4DAE7BC2C64097600D8EB24 /* WeatherDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4DAE7BB2C64097600D8EB24 /* WeatherDataSource.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -165,6 +166,7 @@
 		E4DAE7AF2C63D61700D8EB24 /* BasicServiceFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicServiceFactory.swift; sourceTree = "<group>"; };
 		E4DAE7B12C63D64A00D8EB24 /* Resolver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Resolver.swift; sourceTree = "<group>"; };
 		E4DAE7B62C63E3B000D8EB24 /* RealmMigration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmMigration.swift; sourceTree = "<group>"; };
+		E4DAE7BB2C64097600D8EB24 /* WeatherDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherDataSource.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -372,6 +374,7 @@
 				E462BE3925E9F8C100891B12 /* WeatherViewController.swift */,
 				E462BEE925EA18BD00891B12 /* WeatherViewModel.swift */,
 				E454F9B325EA7DD9006A3640 /* WeatherViewController.xib */,
+				E4DAE7BB2C64097600D8EB24 /* WeatherDataSource.swift */,
 			);
 			path = Weather;
 			sourceTree = "<group>";
@@ -749,6 +752,7 @@
 				E454F9E725EA8B2F006A3640 /* Logger.swift in Sources */,
 				E4532C6425EA2A3A002B7E55 /* RequestFactory.swift in Sources */,
 				E4532C7125EA3271002B7E55 /* Units.swift in Sources */,
+				E4DAE7BC2C64097600D8EB24 /* WeatherDataSource.swift in Sources */,
 				E4532C5F25EA294E002B7E55 /* BaseRequest.swift in Sources */,
 				E462BEEA25EA18BD00891B12 /* WeatherViewModel.swift in Sources */,
 				E4DAE7942C634BBD00D8EB24 /* RetangleItemCell.swift in Sources */,

@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 protocol WeatherViewModelType {
-    var items: [QueryWeatherResponse] { get }
+    var weatherItems: (([QueryWeatherResponse]) -> Void) { get set }
     var delegate: WeatherViewModelDelegate? { get set }
     
     func getWeather()
@@ -21,7 +21,6 @@ protocol WeatherViewModelType {
 }
 
 protocol WeatherViewModelDelegate: AnyObject {
-    func reloadData()
     func showError(_ error: BaseError)
 }
 
@@ -39,11 +38,11 @@ final class WeatherViewModel: WeatherViewModelType {
         self.cities = localStorage.readAll()
     }
     
+    var weatherItems: (([QueryWeatherResponse]) -> Void) = { _ in }
+    
     var items: [QueryWeatherResponse] = [] {
         didSet {
-            DispatchQueue.main.async {
-                self.delegate?.reloadData()
-            }
+            weatherItems(items)
         }
     }
     
