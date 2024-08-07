@@ -14,6 +14,8 @@ protocol WeatherViewModelType {
     
     func getWeather()
     func searchWeather(at city: String, completion: @escaping (QueryWeatherResponse) -> Void)
+    func removeCity(at index: Int)
+    
     func observeChanges()
     func invalidateObservation()
 }
@@ -58,6 +60,11 @@ final class WeatherViewModel: WeatherViewModelType {
                 }
             })
         }
+    }
+    
+    func removeCity(at index: Int) {
+        let item = items.remove(at: index)
+        localStorage.delete(City(id: item.cityId, name: item.cityName))
     }
     
     func observeChanges() {
