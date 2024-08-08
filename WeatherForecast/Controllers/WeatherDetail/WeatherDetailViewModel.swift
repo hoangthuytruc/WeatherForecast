@@ -31,8 +31,7 @@ final class WeatherDetailViewModel: WeatherDetailViewModelType {
     }
     
     var isSavedCity: Bool {
-        let tmp = localStorage.read(item.cityId)
-        return localStorage.read(item.cityId) != nil
+        localStorage.read(item.cityId) != nil
     }
     
     var cityName: String {

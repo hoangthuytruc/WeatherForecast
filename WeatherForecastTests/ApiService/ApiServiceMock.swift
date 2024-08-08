@@ -17,21 +17,3 @@ class ApiServiceMock: ApiServiceType {
         completion(queryWeatherResult ?? .failure(.unknown))
     }
 }
-
-enum Helper {
-    private static func getDataMock(fileData: String) -> Data {
-        let dataUrl = Bundle.main.url(
-            forResource: fileData,
-            withExtension: "json")!
-        let data = try! Data(contentsOf: dataUrl)
-        return data
-    }
-
-    static func getQueryWeatherResponse(at city: String) -> QueryWeatherResponse {
-        let data = getDataMock(fileData: "\(city)_weather")
-        let object = try! JSONDecoder().decode(QueryWeatherResponse.self, from: data)
-        return object
-    }
-}
-
-

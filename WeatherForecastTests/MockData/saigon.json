@@ -1,0 +1,48 @@
+{
+  "base" : "stations",
+  "clouds" : {
+    "all" : 75
+  },
+  "cod" : 200,
+  "coord" : {
+    "lat" : 10.75,
+    "lon" : 106.66670000000001
+  },
+  "dt" : 1723100218,
+  "id" : 1566083,
+  "main" : {
+    "feels_like" : 41.479999999999997,
+    "grnd_level" : 1007,
+    "humidity" : 58,
+    "pressure" : 1007,
+    "sea_level" : 1007,
+    "temp" : 34.479999999999997,
+    "temp_max" : 34.479999999999997,
+    "temp_min" : 34.009999999999998
+  },
+  "name" : "saigon",
+  "rain" : {
+    "1h" : 0.16
+  },
+  "sys" : {
+    "country" : "VN",
+    "id" : 2093009,
+    "sunrise" : 1723070575,
+    "sunset" : 1723115706,
+    "type" : 2
+  },
+  "timezone" : 25200,
+  "visibility" : 10000,
+  "weather" : [
+    {
+      "description" : "light rain",
+      "icon" : "10d",
+      "id" : 500,
+      "main" : "Rain"
+    }
+  ],
+  "wind" : {
+    "deg" : 240,
+    "speed" : 3.6000000000000001
+  }
+}

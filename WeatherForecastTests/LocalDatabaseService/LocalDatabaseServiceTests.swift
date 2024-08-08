@@ -6,126 +6,74 @@
 //
 
 import XCTest
+import RealmSwift
+
 @testable import WeatherForecast
 
 class LocalDatabaseServiceTests: XCTestCase {
-    var localDataService: LocalDatabaseService!
+    var localDataService: RealmDatabaseService!
     
     override func setUp() {
         super.setUp()
-        localDataService = LocalDatabaseService.shared
+        self.localDataService = RealmDatabaseService(realm: try! Realm())
     }
     
-    func testInsertAndGetWeatherObjectsSuccess() {
-        // Given
-        let response = Helper.getQueryWeatherResponse(at: "saigon")
-        
-        // When
-        localDataService.insertWeatherObjects(
-            at: response.city,
-            objects: response.weatherItems,
-            with: "saigon"
-        ) {
-            // Then
-            self.localDataService.getWeatherObjects(
-                at: "saigon") { (items) in
-                XCTAssertNotNil(items)
-                XCTAssertTrue(items == response.weatherItems)
-            }
-        }
+    func testCreation() {
+        let city = City(id: 0, name: "saigon")
+        localDataService.create(city)
+        let savedCity = localDataService.read(0)
+        XCTAssertNotNil(savedCity)
+        XCTAssertTrue(city.isEqual(savedCity!), "The saved city [\(savedCity!.description)] does not equal to the original one [\(city.description)].")
     }
     
-    func testGetWeatherObjectByCity() {
-        // Given
-        let response = Helper.getQueryWeatherResponse(at: "saigon")
-        
-        // When
-        localDataService.insertWeatherObjects(
-            at: response.city,
-            objects: response.weatherItems,
-            with: "saigon") {
-            
-            // Then
-            self.localDataService.getWeatherObjects(
-                at: "saigon") { (items) in
-                XCTAssertNotNil(items)
-                XCTAssertTrue(items! == response.weatherItems)
-            }
-        }
+    func testRead() {
+        let city = City(id: 1, name: "tokyo")
+        localDataService.create(city)
+        let savedCity = localDataService.read(1)
+        XCTAssertNotNil(savedCity)
+        XCTAssertNil(localDataService.read(2))
+        XCTAssertTrue(city.isEqual(savedCity!), "The saved city [\(savedCity!.description)] does not equal to the original one [\(city.description)].")
     }
     
-    func testGetWeatherObjectByPartOfCityName() {
-        // Given
-        let response = Helper.getQueryWeatherResponse(at: "saigon")
-        
-        // When
-        localDataService.insertWeatherObjects(
-            at: response.city,
-            objects: response.weatherItems,
-            with: "saigon") {
-            
-            // Then
-            self.localDataService.getWeatherObjects(
-                at: "saig") { (items) in
-                XCTAssertNotNil(items)
-                XCTAssertTrue(items! == response.weatherItems)
-            }
-        }
+    func testUpdate() {
+        let city = City(id: 1, name: "paris")
+        localDataService.update(city)
+        let savedCity = localDataService.read(1)
+        XCTAssertNotNil(savedCity)
+        XCTAssertTrue(city.isEqual(savedCity!), "The saved city [\(savedCity!.description)] does not equal to the original one [\(city.description)].")
     }
     
-    func testClearLocalDatabaseService() {
-        // Given
-        let response = Helper.getQueryWeatherResponse(at: "saigon")
-        
-        // When
-        localDataService.insertWeatherObjects(
-            at: response.city,
-            objects: response.weatherItems,
-            with: "saigon"
-        ) {
-            // Then
-            self.localDataService.getWeatherObjects(
-                at: "saigon") { (items) in
-                XCTAssertNotNil(items)
-            }
-        }
-        
-        // When
-        localDataService.clear()
-        
-        // Then
-        localDataService.getWeatherObjects(
-            at: "saigon") { (items) in
-            XCTAssertNil(items)
-        }
+    func testDelete() {
+        let city = City(id: 0, name: "saigon")
+        localDataService.delete(city)
+        XCTAssertNil(localDataService.read(0))
     }
     
-    func testSynchronousLocalDatabaseService() {
-        // Given
-        let response = Helper.getQueryWeatherResponse(at: "saigon")
-
-        // When
-        localDataService.insertWeatherObjects(
-            at: response.city,
-            objects: response.weatherItems,
-            with: "saigon",
-            completionHandler: {
-                self.localDataService.getWeatherObjects(
-                    at: "sai",
-                    completionHandler: { items in
-                        XCTAssertNotNil(items)
-                        XCTAssertTrue(items! == response.weatherItems)
-                    }
-                )
-            }
-        )
-
-        // Then
-        DispatchQueue.main.async {
-            self.localDataService.getWeatherObjects(
-                at: "saigon") { (items) in
-                XCTAssertNil(items)
-            }
+    func testReadAll() {
+        let total = localDataService.readAll().count
+        XCTAssertTrue(total == 1, "The total of saved items (\(total)) does not equal to 1.")
+    }
+    
+    func testDeleteAll() {
+        localDataService.deleteAll()
+        let total = localDataService.readAll().count
+        XCTAssertTrue(total == 0, "The local storage is not empty.")
+    }
+    
+    func testChangesObservation() {
+        let city1 = City(id: 0, name: "saigon")
+        let city2 = City(id: 1, name: "hanoi")
+        let city3 = City(id: 2, name: "bmt")
+        localDataService.create(city1)
+        localDataService.create(city2)
+        localDataService.observe { city in
+            let savedCity = self.localDataService.read(3)
+            XCTAssertNotNil(savedCity)
+            XCTAssertTrue(savedCity!.isEqual(city3), "The saved city [\(savedCity!.description)] does not equal to the original one [\(city3.description)].")
         }
+        localDataService.create(city3)
+        localDataService.invalidateObservation()
+        let city4 = City(id: 3, name: "hue")
+        localDataService.create(city4)
     }
 }

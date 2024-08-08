@@ -83,6 +83,10 @@ final class WeatherViewModel: WeatherViewModelType {
         }
     }
     
+    func searchWeather(at city: String, completion: @escaping (QueryWeatherResponse) -> Void) {
+        queryWeather(at: city) { completion($0) }
+    }
+    
     func removeCity(at index: Int) {
         let item = items.remove(at: index)
         localStorage.delete(City(id: item.cityId, name: item.cityName))
@@ -111,10 +115,6 @@ final class WeatherViewModel: WeatherViewModelType {
     
     func invalidateObservation() {
         localStorage.invalidateObservation()
-    }
-    
-    func searchWeather(at city: String, completion: @escaping (QueryWeatherResponse) -> Void) {
-        queryWeather(at: city) { completion($0) }
     }
     
     private func queryWeather(at city: String, completion: @escaping ((QueryWeatherResponse) -> Void)) {

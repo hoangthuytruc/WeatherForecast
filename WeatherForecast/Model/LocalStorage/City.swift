@@ -18,3 +18,17 @@ final class City: Object {
         self.name = name
     }
 }
+
+extension City {
+    override var description: String {
+        "\(name) (Id: \(id)"
+    }
+    
+    override func isEqual(_ object: Any?) -> Bool {
+        if let object = object as? City {
+            return self.id == object.id && self.name == object.name
+        } else {
+            return super.isEqual(object)
+        }
+    }
+}

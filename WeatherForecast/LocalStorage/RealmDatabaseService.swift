@@ -71,7 +71,7 @@ final class RealmDatabaseService: LocalStorageType {
             if let obj = realm.objects(City.self).first(where: { $0.id == item.id }) {
                 try realm.write {
                     realm.delete(obj)
-                }
+                }                
             }
         } catch {
             print(error.localizedDescription)
