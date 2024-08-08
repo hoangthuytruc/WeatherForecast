@@ -13,7 +13,7 @@ class WeatherViewController: BaseViewController, UISearchResultsUpdating {
     private var viewModel: WeatherViewModelType
     private let vcFactory: ViewcontrollerFactory
     private var dataSource: WeatherDataSource?
-    private lazy var resultsVC = SearchCityTableViewController()
+    private lazy var resultsVC = vcFactory.makeSearchResultsController()
         
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

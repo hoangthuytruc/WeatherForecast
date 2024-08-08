@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class SearchCityTableViewController: UITableViewController {
+final class SearchResultsTableViewController: UITableViewController {
     
     var filteredCities = [City]()
     var itemSelected: ((City) -> Void)?
@@ -32,6 +32,7 @@ final class SearchCityTableViewController: UITableViewController {
         }
         let item = filteredCities[indexPath.row]
         cell.textLabel?.text = item.name
+        cell.textLabel?.textColor = .white
         cell.backgroundColor = .clear
         cell.selectionStyle = .none
         return cell

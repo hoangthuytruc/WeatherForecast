@@ -11,6 +11,7 @@ import RealmSwift
 protocol ViewcontrollerFactory {
     func makeWeatherListController() -> WeatherViewController
     func makeWeatherDetailController(item: QueryWeatherResponse) -> WeatherDetailViewController
+    func makeSearchResultsController() -> SearchResultsTableViewController
 }
 
 final class DependencyContainer: ViewcontrollerFactory {
@@ -42,6 +43,11 @@ final class DependencyContainer: ViewcontrollerFactory {
                 item: item
             )
         )
+        return controller
+    }
+    
+    func makeSearchResultsController() -> SearchResultsTableViewController {
+        let controller = SearchResultsTableViewController()
         return controller
     }
 }
