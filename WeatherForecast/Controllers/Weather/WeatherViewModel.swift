@@ -39,9 +39,20 @@ final class WeatherViewModel: WeatherViewModelType {
         }
     }
     
-    lazy var cities: [City] = {
-        var cities = [City]()
-        if let path = Bundle.main.path(forResource: "cities", ofType: "json") {
+    private(set) var cities = [City]()
+    
+    var weatherItems: (([QueryWeatherResponse]) -> Void) = { _ in }
+    
+    init(apiService: ApiServiceType,
+         localStorage: LocalStorageType) {
+        self.apiService = apiService
+        self.localStorage = localStorage
+        self.savedCities = localStorage.readAll()
+        fetchCityList()
+    }
+    
+    func fetchCityList(from fileName: String = "cities") {
+        if let path = Bundle.main.path(forResource: fileName, ofType: "json") {
             do {
                 let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
                 let jsonResult = try JSONSerialization.jsonObject(with: data, options: .mutableLeaves)
@@ -56,16 +67,6 @@ final class WeatherViewModel: WeatherViewModelType {
                 print(error.localizedDescription)
             }
         }
-        return cities
-    }()
-    
-    var weatherItems: (([QueryWeatherResponse]) -> Void) = { _ in }
-    
-    init(apiService: ApiServiceType,
-         localStorage: LocalStorageType) {
-        self.apiService = apiService
-        self.localStorage = localStorage
-        self.savedCities = localStorage.readAll()
     }
     
     func getWeather() {
