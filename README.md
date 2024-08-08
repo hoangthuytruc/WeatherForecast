@@ -9,7 +9,7 @@ WeatherForecast is an application to retrieve the weather information for a spec
 ## Overview
 ### The structure of project
 ```
-|-- WeatherForecast/
+WeatherForecast/
 |-- Configuration/
 |-- DependencyContainer/
 |-- ApiService/
@@ -25,8 +25,8 @@ WeatherForecast is an application to retrieve the weather information for a spec
 |   |-- RealmDatabaseService
 |   |-- RealmMigration
 |-- Utils/
-| WeatherForecastTests
-| WeatherForecastUITests
+WeatherForecastTests
+WeatherForecastUITests
 ```
 
 ### Architectural pattern: MVVM
