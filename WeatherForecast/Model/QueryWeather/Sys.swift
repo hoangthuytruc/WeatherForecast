@@ -8,8 +8,8 @@
 import Foundation
 
 struct Sys: Decodable {
-    let type: Int
-    let id: Int
+    let type: Int?
+    let id: Int?
     let country: String
     private let sunriseTimeInterval: Int
     private let sunsetTimeInternal: Int

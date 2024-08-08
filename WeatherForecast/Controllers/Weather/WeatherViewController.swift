@@ -7,13 +7,13 @@
 
 import UIKit
 
-class WeatherViewController: BaseViewController {
-    @IBOutlet weak var searchBar: UISearchBar!
+class WeatherViewController: BaseViewController, UISearchResultsUpdating {
     @IBOutlet weak var tableView: UITableView!
     
     private var viewModel: WeatherViewModelType
     private let vcFactory: ViewcontrollerFactory
     private var dataSource: WeatherDataSource?
+    private lazy var resultsVC = SearchCityTableViewController()
         
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -30,6 +30,8 @@ class WeatherViewController: BaseViewController {
         super.viewDidLoad()
         title = "Weather"
         
+        setupSearchController()
+
         tableView.register(
             UINib(nibName: String(describing: WeatherCell.self), bundle: nil),
             forCellReuseIdentifier: "Cell"
@@ -45,7 +47,6 @@ class WeatherViewController: BaseViewController {
         tableView.dataSource = dataSource
         tableView.delegate = dataSource
         
-        searchBar.delegate = self
         viewModel.delegate = self
         
         viewModel.weatherItems = { [weak self] items in
@@ -54,6 +55,33 @@ class WeatherViewController: BaseViewController {
         }
         
         viewModel.getWeather()
+    }
+    
+    fileprivate func setupSearchController() {
+        edgesForExtendedLayout = .top
+        extendedLayoutIncludesOpaqueBars = true
+        
+        let searchController = UISearchController(searchResultsController: resultsVC)
+        if #available(iOS 13.0, *) {
+            searchController.showsSearchResultsController = true
+        }
+        searchController.searchResultsUpdater = self
+        resultsVC.itemSelected = { [weak self] item in
+            self?.viewModel.searchWeather(at: item.name) { response in
+                self?.presentWeatherDetailViewController(response)
+            }
+            searchController.isActive = false
+        }
+        navigationItem.searchController = searchController
+    }
+    
+    func updateSearchResults(for searchController: UISearchController) {
+        guard let searchText = searchController.searchBar.text else {
+            return
+        }
+        resultsVC.filteredCities.removeAll()
+        resultsVC.filteredCities = viewModel.filterCities(with: searchText)
+        resultsVC.tableView.reloadData()
     }
     
     fileprivate func presentWeatherDetailViewController(_ item: QueryWeatherResponse) {
@@ -70,20 +98,5 @@ class WeatherViewController: BaseViewController {
 extension WeatherViewController: WeatherViewModelDelegate {
     func showError(_ error: BaseError) {
         show(message: error.localizedDescription)
-    }
-}
-
-// MARK: - UISearchBarDelegate
-extension WeatherViewController: UISearchBarDelegate {
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        if let text = searchBar.text, !text.isEmpty {
-            viewModel.searchWeather(at: text) { [weak self] response in
-                self?.presentWeatherDetailViewController(response)
-            }
-        }
-    }
-    
-    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
-        viewModel.observeChanges()
     }
 }

@@ -9,12 +9,14 @@ import Foundation
 import UIKit
 
 protocol WeatherViewModelType {
+    var cities: [City] { get }
     var weatherItems: (([QueryWeatherResponse]) -> Void) { get set }
     var delegate: WeatherViewModelDelegate? { get set }
     
     func getWeather()
     func searchWeather(at city: String, completion: @escaping (QueryWeatherResponse) -> Void)
     func removeCity(at index: Int)
+    func filterCities(with name: String) -> [City]
     
     func observeChanges()
     func invalidateObservation()
@@ -29,13 +31,32 @@ final class WeatherViewModel: WeatherViewModelType {
     private let apiService: ApiServiceType
     private let localStorage: LocalStorageType
     
-    private var cities: [City]
+    lazy var cities: [City] = {
+        var cities = [City]()
+        if let path = Bundle.main.path(forResource: "cities", ofType: "json") {
+            do {
+                let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
+                let jsonResult = try JSONSerialization.jsonObject(with: data, options: .mutableLeaves)
+                if let items = jsonResult as? [Dictionary<String, AnyObject>] {
+                    items.forEach { dict in
+                        if let id = dict["id"] as? Int, let name = dict["name"] as? String {
+                            cities.append(City(id: id, name: name))
+                        }
+                    }
+                }
+            } catch {
+                print(error.localizedDescription)
+            }
+        }
+        return cities
+    }()
+    private var savedCities: [City]
     
     init(apiService: ApiServiceType,
          localStorage: LocalStorageType) {
         self.apiService = apiService
         self.localStorage = localStorage
-        self.cities = localStorage.readAll()
+        self.savedCities = localStorage.readAll()
     }
     
     var weatherItems: (([QueryWeatherResponse]) -> Void) = { _ in }
@@ -47,13 +68,13 @@ final class WeatherViewModel: WeatherViewModelType {
     }
     
     func getWeather() {
-        if cities.isEmpty {
+        if savedCities.isEmpty {
             queryWeather(at: "saigon") { [weak self] response in
                 self?.items.append(response)
                 self?.localStorage.create(City(id: response.cityId, name: response.cityName))
             }
         } else {
-            cities.forEach({
+            savedCities.forEach({
                 queryWeather(at: $0.name) { [weak self] response in
                     self?.items.append(response)
                 }
@@ -64,6 +85,10 @@ final class WeatherViewModel: WeatherViewModelType {
     func removeCity(at index: Int) {
         let item = items.remove(at: index)
         localStorage.delete(City(id: item.cityId, name: item.cityName))
+    }
+    
+    func filterCities(with name: String) -> [City] {
+        cities.filter({ $0.name.contains(name) })
     }
     
     func observeChanges() {

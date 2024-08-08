@@ -72,6 +72,8 @@
 		E4DAE7B72C63E3B000D8EB24 /* RealmMigration.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4DAE7B62C63E3B000D8EB24 /* RealmMigration.swift */; };
 		E4DAE7BC2C64097600D8EB24 /* WeatherDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4DAE7BB2C64097600D8EB24 /* WeatherDataSource.swift */; };
 		E4DAE7BE2C64115C00D8EB24 /* WeatherDetailDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4DAE7BD2C64115C00D8EB24 /* WeatherDetailDataSource.swift */; };
+		E4DAE7C02C64160400D8EB24 /* cities.json in Resources */ = {isa = PBXBuildFile; fileRef = E4DAE7BF2C64160400D8EB24 /* cities.json */; };
+		E4DAE7C22C64176E00D8EB24 /* SearchCityTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4DAE7C12C64176E00D8EB24 /* SearchCityTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -169,6 +171,8 @@
 		E4DAE7B62C63E3B000D8EB24 /* RealmMigration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmMigration.swift; sourceTree = "<group>"; };
 		E4DAE7BB2C64097600D8EB24 /* WeatherDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherDataSource.swift; sourceTree = "<group>"; };
 		E4DAE7BD2C64115C00D8EB24 /* WeatherDetailDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherDetailDataSource.swift; sourceTree = "<group>"; };
+		E4DAE7BF2C64160400D8EB24 /* cities.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = cities.json; sourceTree = "<group>"; };
+		E4DAE7C12C64176E00D8EB24 /* SearchCityTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCityTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -265,6 +269,7 @@
 				E462BE4325E9F8C200891B12 /* Info.plist */,
 				E462BE3525E9F8C100891B12 /* AppDelegate.swift */,
 				E462BE4025E9F8C200891B12 /* LaunchScreen.storyboard */,
+				E4DAE7BF2C64160400D8EB24 /* cities.json */,
 				E462BE3E25E9F8C200891B12 /* Assets.xcassets */,
 			);
 			path = WeatherForecast;
@@ -377,6 +382,7 @@
 				E462BEE925EA18BD00891B12 /* WeatherViewModel.swift */,
 				E454F9B325EA7DD9006A3640 /* WeatherViewController.xib */,
 				E4DAE7BB2C64097600D8EB24 /* WeatherDataSource.swift */,
+				E4DAE7C12C64176E00D8EB24 /* SearchCityTableViewController.swift */,
 			);
 			path = Weather;
 			sourceTree = "<group>";
@@ -605,6 +611,7 @@
 				E46415F025EB8DA900C84A73 /* saigon_weather.json in Resources */,
 				E4DAE7952C634BBD00D8EB24 /* RetangleItemCell.xib in Resources */,
 				E42CC7D425EBDD1B003F06CE /* .swiftlint.yml in Resources */,
+				E4DAE7C02C64160400D8EB24 /* cities.json in Resources */,
 				E462BE4225E9F8C200891B12 /* LaunchScreen.storyboard in Resources */,
 				E462BE3F25E9F8C200891B12 /* Assets.xcassets in Resources */,
 				E475E2732C615323009B86C5 /* SquareItemCell.xib in Resources */,
@@ -772,6 +779,7 @@
 				E454F9EF25EA9791006A3640 /* NumberFormatter.swift in Sources */,
 				E46415C125EB5C2400C84A73 /* BaseNavigationController.swift in Sources */,
 				E462BEB325EA116900891B12 /* Date+Ext.swift in Sources */,
+				E4DAE7C22C64176E00D8EB24 /* SearchCityTableViewController.swift in Sources */,
 				E4DAE7B02C63D61700D8EB24 /* BasicServiceFactory.swift in Sources */,
 				E4DAE7AE2C63D5DB00D8EB24 /* AnyServiceFactory.swift in Sources */,
 				E4532C6925EA2E03002B7E55 /* Configuration.swift in Sources */,

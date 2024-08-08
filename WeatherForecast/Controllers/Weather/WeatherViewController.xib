@@ -10,7 +10,6 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="WeatherViewController" customModule="WeatherForecast" customModuleProvider="target">
             <connections>
-                <outlet property="searchBar" destination="g99-Lt-sAY" id="sEx-To-kkC"/>
                 <outlet property="tableView" destination="odo-MN-kYA" id="CT2-aK-zER"/>
                 <outlet property="view" destination="uWQ-NR-vTh" id="LL3-aR-tLt"/>
             </connections>
@@ -20,12 +19,8 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <searchBar contentMode="redraw" searchBarStyle="minimal" placeholder="Search for a city" translatesAutoresizingMaskIntoConstraints="NO" id="g99-Lt-sAY">
-                    <rect key="frame" x="0.0" y="48" width="414" height="56"/>
-                    <textInputTraits key="textInputTraits"/>
-                </searchBar>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" keyboardDismissMode="onDrag" style="plain" separatorStyle="none" rowHeight="128" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="odo-MN-kYA">
-                    <rect key="frame" x="8" y="104" width="398" height="758"/>
+                    <rect key="frame" x="8" y="48" width="398" height="814"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <inset key="separatorInset" minX="15" minY="0.0" maxX="0.0" maxY="0.0"/>
                 </tableView>
@@ -33,13 +28,10 @@
             <viewLayoutGuide key="safeArea" id="e9d-Nl-0c2"/>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
-                <constraint firstItem="g99-Lt-sAY" firstAttribute="top" secondItem="e9d-Nl-0c2" secondAttribute="top" id="24x-xk-joS"/>
+                <constraint firstItem="odo-MN-kYA" firstAttribute="top" secondItem="e9d-Nl-0c2" secondAttribute="top" id="2JD-N0-1PN"/>
                 <constraint firstItem="e9d-Nl-0c2" firstAttribute="trailing" secondItem="odo-MN-kYA" secondAttribute="trailing" constant="8" id="50K-qq-uXc"/>
                 <constraint firstItem="odo-MN-kYA" firstAttribute="leading" secondItem="e9d-Nl-0c2" secondAttribute="leading" constant="8" id="6Fo-R0-GTw"/>
-                <constraint firstItem="g99-Lt-sAY" firstAttribute="trailing" secondItem="e9d-Nl-0c2" secondAttribute="trailing" id="BJN-hR-z6a"/>
-                <constraint firstItem="g99-Lt-sAY" firstAttribute="leading" secondItem="e9d-Nl-0c2" secondAttribute="leading" id="C3T-eQ-HTp"/>
                 <constraint firstItem="e9d-Nl-0c2" firstAttribute="bottom" secondItem="odo-MN-kYA" secondAttribute="bottom" id="lcO-hg-Hnw"/>
-                <constraint firstItem="odo-MN-kYA" firstAttribute="top" secondItem="g99-Lt-sAY" secondAttribute="bottom" id="xBu-4G-s4G"/>
             </constraints>
             <point key="canvasLocation" x="-775" y="42"/>
         </view>
