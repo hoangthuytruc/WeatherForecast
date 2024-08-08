@@ -62,6 +62,7 @@ class WeatherViewController: BaseViewController, UISearchResultsUpdating {
         extendedLayoutIncludesOpaqueBars = true
         
         let searchController = UISearchController(searchResultsController: resultsVC)
+        searchController.searchBar.placeholder = "Search for a city"
         if #available(iOS 13.0, *) {
             searchController.showsSearchResultsController = true
         }

@@ -36,6 +36,7 @@ class BaseNavigationController: UINavigationController {
             let appearance = UINavigationBarAppearance()
             appearance.configureWithTransparentBackground()
             appearance.shadowColor = .clear
+            appearance.largeTitleTextAttributes = [.foregroundColor: UIColor.black]
             UINavigationBar.appearance().standardAppearance = appearance
             UINavigationBar.appearance().scrollEdgeAppearance = appearance
         }
