@@ -4,7 +4,7 @@ WeatherForecast is an application to retrieve the weather information of a speci
 - Add the favorite cities.
 
 ## Screenshot
-![screenshot](/screenshots/screenshots-1.png) ![screenshot](/screenshots/screenshots-2.png) ![screenshot](/screenshots/screenshots-3.png)
+<img src="/screenshots/screenshots-1.png" width=30% height=30%> <img src="/screenshots/screenshots-2.png" width=30% height=30%> <img src="/screenshots/screenshots-3.png" width=30% height=30%>
 
 ## Overview
 ### The structure of project
