@@ -14,7 +14,9 @@ final class SearchCityTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .clear
+        view.backgroundColor = UIColor.black.withAlphaComponent(0.8)
+        edgesForExtendedLayout = []
+        tableView.keyboardDismissMode = .onDrag
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -30,6 +32,8 @@ final class SearchCityTableViewController: UITableViewController {
         }
         let item = filteredCities[indexPath.row]
         cell.textLabel?.text = item.name
+        cell.backgroundColor = .clear
+        cell.selectionStyle = .none
         return cell
     }
     

@@ -16,7 +16,7 @@ protocol WeatherViewModelType {
     func getWeather()
     func searchWeather(at city: String, completion: @escaping (QueryWeatherResponse) -> Void)
     func removeCity(at index: Int)
-    func filterCities(with name: String) -> [City]
+    func searchCity(with name: String, completion: @escaping (([City]) -> Void))
     
     func observeChanges()
     func invalidateObservation()
@@ -30,6 +30,8 @@ final class WeatherViewModel: WeatherViewModelType {
     weak var delegate: WeatherViewModelDelegate?
     private let apiService: ApiServiceType
     private let localStorage: LocalStorageType
+    
+    private let searchQueue = OperationQueue()
     
     lazy var cities: [City] = {
         var cities = [City]()
@@ -87,8 +89,13 @@ final class WeatherViewModel: WeatherViewModelType {
         localStorage.delete(City(id: item.cityId, name: item.cityName))
     }
     
-    func filterCities(with name: String) -> [City] {
-        cities.filter({ $0.name.contains(name) })
+    func searchCity(with name: String, completion: @escaping (([City]) -> Void)) {
+        searchQueue.cancelAllOperations()
+        let task = SearchTask(searchText: name, items: self.cities)
+        task.completionBlock = {
+            completion(task.filteredItems)
+        }
+        searchQueue.addOperation(task)
     }
     
     func observeChanges() {
@@ -118,5 +125,24 @@ final class WeatherViewModel: WeatherViewModelType {
                 self?.delegate?.showError(error)
             }
         }
+    }
+}
+
+final class SearchTask: Operation {
+    let searchText: String
+    let items: [City]
+    
+    var filteredItems = [City]()
+    
+    init(searchText: String, items: [City]) {
+        self.searchText = searchText
+        self.items = items
+    }
+    
+    override func main() {
+        guard !isCancelled else {
+            return
+        }
+        filteredItems = items.filter({ $0.name.contains(searchText) })
     }
 }

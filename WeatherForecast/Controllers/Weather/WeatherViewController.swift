@@ -60,28 +60,31 @@ class WeatherViewController: BaseViewController, UISearchResultsUpdating {
     fileprivate func setupSearchController() {
         edgesForExtendedLayout = .top
         extendedLayoutIncludesOpaqueBars = true
-        
         let searchController = UISearchController(searchResultsController: resultsVC)
         searchController.searchBar.placeholder = "Search for a city"
+        searchController.searchBar.delegate = self
         if #available(iOS 13.0, *) {
             searchController.showsSearchResultsController = true
         }
+        searchController.obscuresBackgroundDuringPresentation = true
         searchController.searchResultsUpdater = self
         resultsVC.itemSelected = { [weak self] item in
             self?.viewModel.searchWeather(at: item.name) { response in
                 self?.presentWeatherDetailViewController(response)
             }
-            searchController.isActive = false
+            searchController.isActive = true
         }
         navigationItem.searchController = searchController
+        navigationItem.hidesSearchBarWhenScrolling = false
     }
     
     func updateSearchResults(for searchController: UISearchController) {
         guard let searchText = searchController.searchBar.text else {
             return
         }
-        resultsVC.filteredCities.removeAll()
-        resultsVC.filteredCities = viewModel.filterCities(with: searchText)
+        viewModel.searchCity(with: searchText) { [weak self] items in
+            self?.resultsVC.filteredCities = items
+        }
         resultsVC.tableView.reloadData()
     }
     
@@ -99,5 +102,19 @@ class WeatherViewController: BaseViewController, UISearchResultsUpdating {
 extension WeatherViewController: WeatherViewModelDelegate {
     func showError(_ error: BaseError) {
         show(message: error.localizedDescription)
+    }
+}
+
+extension WeatherViewController: UISearchBarDelegate {
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        guard let searchText = searchBar.text, !searchText.isEmpty else {
+            return
+        }
+        viewModel.searchWeather(at: searchText) { [weak self] response in
+            self?.presentWeatherDetailViewController(response)
+        }
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
     }
 }

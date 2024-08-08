@@ -27,16 +27,15 @@ class BaseNavigationController: UINavigationController {
         navigationBar.isTranslucent = false
         navigationBar.backgroundColor = .clear
         navigationBar.tintColor = .black
-        
-        if #available(iOS 11.0, *) {
-            navigationBar.prefersLargeTitles = true
-        }
+        navigationBar.titleTextAttributes = [.foregroundColor: UIColor.black]
         
         if #available(iOS 15, *) {
             let appearance = UINavigationBarAppearance()
             appearance.configureWithTransparentBackground()
             appearance.shadowColor = .clear
             appearance.largeTitleTextAttributes = [.foregroundColor: UIColor.black]
+            appearance.titleTextAttributes = [.foregroundColor: UIColor.black]
+            UINavigationBar.appearance().compactAppearance = appearance
             UINavigationBar.appearance().standardAppearance = appearance
             UINavigationBar.appearance().scrollEdgeAppearance = appearance
         }
