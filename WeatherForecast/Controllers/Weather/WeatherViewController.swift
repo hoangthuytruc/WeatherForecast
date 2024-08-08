@@ -14,6 +14,7 @@ class WeatherViewController: BaseViewController, UISearchResultsUpdating {
     private let vcFactory: ViewcontrollerFactory
     private var dataSource: WeatherDataSource?
     private lazy var resultsVC = vcFactory.makeSearchResultsController()
+    private var timer: Timer?
         
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -53,7 +54,9 @@ class WeatherViewController: BaseViewController, UISearchResultsUpdating {
             self?.dataSource?.items = items
             self?.tableView.reloadData()
         }
+        
         viewModel.getWeather()
+        viewModel.observeChanges()
     }
     
     fileprivate func setupSearchController() {
@@ -81,12 +84,16 @@ class WeatherViewController: BaseViewController, UISearchResultsUpdating {
         guard let searchText = searchController.searchBar.text else {
             return
         }
-        viewModel.searchCity(with: searchText) { [weak self] items in
-            DispatchQueue.main.async {
-                self?.resultsVC.filteredCities = items
-                self?.resultsVC.tableView.reloadData()
+
+        timer?.invalidate()
+        timer = Timer.scheduledTimer(withTimeInterval: 0.3, repeats: false, block: { [weak self] _ in
+            self?.viewModel.searchCity(with: searchText) { items in
+                DispatchQueue.main.async {
+                    self?.resultsVC.filteredCities = items
+                    self?.resultsVC.tableView.reloadData()
+                }
             }
-        }
+        })
     }
     
     fileprivate func presentWeatherDetailViewController(_ item: QueryWeatherResponse) {
@@ -115,9 +122,5 @@ extension WeatherViewController: UISearchBarDelegate {
         viewModel.searchWeather(at: searchText) { [weak self] response in
             self?.presentWeatherDetailViewController(response)
         }
-    }
-    
-    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
-        viewModel.observeChanges()
     }
 }
