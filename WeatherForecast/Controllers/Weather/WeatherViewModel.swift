@@ -58,7 +58,9 @@ final class WeatherViewModel: WeatherViewModelType {
                 let jsonResult = try JSONSerialization.jsonObject(with: data, options: .mutableLeaves)
                 if let items = jsonResult as? [Dictionary<String, AnyObject>] {
                     items.forEach { dict in
-                        if let id = dict["id"] as? Int, let name = dict["name"] as? String {
+                        if let idString = dict["id"] as? String,
+                            let id = Int(idString),
+                            let name = dict["city_ascii"] as? String {
                             cities.append(City(id: id, name: name))
                         }
                     }
@@ -147,6 +149,13 @@ final class SearchTask: Operation {
         guard !isCancelled else {
             return
         }
-        filteredItems = items.filter({ $0.name.contains(searchText) })
+        let searchText = searchText
+            .lowercased()
+            .folding(options: .diacriticInsensitive, locale: .current)
+        filteredItems = items.filter { item in
+            item.name
+                .lowercased()
+                .contains(searchText)
+        }
     }
 }
