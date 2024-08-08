@@ -31,6 +31,10 @@ final class WeatherDataSource: NSObject, UITableViewDelegate, UITableViewDataSou
         didSelectItemAt(items[indexPath.row])
     }
     
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        indexPath.row != 0
+    }
+    
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             items.remove(at: indexPath.row)

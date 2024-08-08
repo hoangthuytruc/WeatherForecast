@@ -53,7 +53,6 @@ class WeatherViewController: BaseViewController, UISearchResultsUpdating {
             self?.dataSource?.items = items
             self?.tableView.reloadData()
         }
-        
         viewModel.getWeather()
     }
     
@@ -72,7 +71,7 @@ class WeatherViewController: BaseViewController, UISearchResultsUpdating {
             self?.viewModel.searchWeather(at: item.name) { response in
                 self?.presentWeatherDetailViewController(response)
             }
-            searchController.isActive = true
+            searchController.isActive = false
         }
         navigationItem.searchController = searchController
         navigationItem.hidesSearchBarWhenScrolling = false
@@ -83,9 +82,11 @@ class WeatherViewController: BaseViewController, UISearchResultsUpdating {
             return
         }
         viewModel.searchCity(with: searchText) { [weak self] items in
-            self?.resultsVC.filteredCities = items
+            DispatchQueue.main.async {
+                self?.resultsVC.filteredCities = items
+                self?.resultsVC.tableView.reloadData()
+            }
         }
-        resultsVC.tableView.reloadData()
     }
     
     fileprivate func presentWeatherDetailViewController(_ item: QueryWeatherResponse) {
@@ -107,7 +108,8 @@ extension WeatherViewController: WeatherViewModelDelegate {
 
 extension WeatherViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        guard let searchText = searchBar.text, !searchText.isEmpty else {
+        navigationItem.searchController?.isActive = false
+        guard let searchText = searchBar.text else {
             return
         }
         viewModel.searchWeather(at: searchText) { [weak self] response in
@@ -115,6 +117,7 @@ extension WeatherViewController: UISearchBarDelegate {
         }
     }
     
-    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        viewModel.observeChanges()
     }
 }

@@ -32,6 +32,12 @@ final class WeatherViewModel: WeatherViewModelType {
     private let localStorage: LocalStorageType
     
     private let searchQueue = OperationQueue()
+    private var savedCities: [City]
+    private var items: [QueryWeatherResponse] = [] {
+        didSet {
+            weatherItems(items)
+        }
+    }
     
     lazy var cities: [City] = {
         var cities = [City]()
@@ -52,21 +58,14 @@ final class WeatherViewModel: WeatherViewModelType {
         }
         return cities
     }()
-    private var savedCities: [City]
+    
+    var weatherItems: (([QueryWeatherResponse]) -> Void) = { _ in }
     
     init(apiService: ApiServiceType,
          localStorage: LocalStorageType) {
         self.apiService = apiService
         self.localStorage = localStorage
         self.savedCities = localStorage.readAll()
-    }
-    
-    var weatherItems: (([QueryWeatherResponse]) -> Void) = { _ in }
-    
-    var items: [QueryWeatherResponse] = [] {
-        didSet {
-            weatherItems(items)
-        }
     }
     
     func getWeather() {
@@ -90,6 +89,10 @@ final class WeatherViewModel: WeatherViewModelType {
     }
     
     func searchCity(with name: String, completion: @escaping (([City]) -> Void)) {
+        guard !name.isEmpty else {
+            completion([])
+            return
+        }
         searchQueue.cancelAllOperations()
         let task = SearchTask(searchText: name, items: self.cities)
         task.completionBlock = {

@@ -88,7 +88,7 @@ final class RealmDatabaseService: LocalStorageType {
             case .initial(_):
                 break
             case .update(_, _, let insertions, _):
-                if let newIdx = insertions.first,
+                if let newIdx = insertions.first, newIdx > 0,
                     let newObjects = self?.realm.objects(City.self) {
                     if newObjects.count > newIdx {
                         let newObject = newObjects[newIdx]
