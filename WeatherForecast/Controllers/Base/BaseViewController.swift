@@ -22,7 +22,6 @@ class BaseViewController: UIViewController, DialogViewPresentable {
         super.viewDidLoad()
         edgesForExtendedLayout = []
         setNeedsStatusBarAppearanceUpdate()
-        view.scaleUIElementsIfNeeded(in: view)
     }
     
     deinit {

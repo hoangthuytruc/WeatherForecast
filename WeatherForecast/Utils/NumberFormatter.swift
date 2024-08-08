@@ -8,12 +8,27 @@
 import Foundation
 
 extension Double {
-    func toCelsius() -> String {
+    func formatted(unit: Unit) -> String {
         let formatter = MeasurementFormatter()
-        formatter.numberFormatter.numberStyle = .none
-        formatter.unitStyle = .medium
-        let temp = Measurement(value: Double(floor(self)), unit: UnitTemperature.celsius)
+        let temp = Measurement(value: self, unit: unit)
         
-        return temp.description.replacingOccurrences(of: ".0", with: "")
+        let numberFormatter = NumberFormatter()
+        
+        switch unit {
+        case is UnitTemperature:
+            formatter.unitStyle = .short
+            numberFormatter.numberStyle = .none
+        
+        case is UnitPressure:
+            formatter.unitStyle = .medium
+            numberFormatter.numberStyle = .decimal
+            
+        default:
+            formatter.unitStyle = .medium
+            numberFormatter.numberStyle = .none
+        }
+        formatter.numberFormatter = numberFormatter
+
+        return formatter.string(from: temp)
     }
 }

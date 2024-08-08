@@ -1,18 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22685"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="WeatherViewController" customModule="WeatherForecast" customModuleProvider="target">
             <connections>
-                <outlet property="activityIndicator" destination="bsW-el-Bg1" id="2Ck-b1-oX5"/>
-                <outlet property="searchBar" destination="g99-Lt-sAY" id="sEx-To-kkC"/>
                 <outlet property="tableView" destination="odo-MN-kYA" id="CT2-aK-zER"/>
                 <outlet property="view" destination="uWQ-NR-vTh" id="LL3-aR-tLt"/>
             </connections>
@@ -22,41 +19,21 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <searchBar contentMode="redraw" showsCancelButton="YES" translatesAutoresizingMaskIntoConstraints="NO" id="g99-Lt-sAY">
-                    <rect key="frame" x="0.0" y="44" width="414" height="56"/>
-                    <textInputTraits key="textInputTraits"/>
-                </searchBar>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" style="plain" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="odo-MN-kYA">
-                    <rect key="frame" x="0.0" y="100" width="414" height="762"/>
-                    <color key="backgroundColor" systemColor="systemGray6Color"/>
-                    <inset key="separatorInset" minX="20" minY="0.0" maxX="0.0" maxY="0.0"/>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" keyboardDismissMode="onDrag" style="plain" separatorStyle="none" rowHeight="128" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="odo-MN-kYA">
+                    <rect key="frame" x="8" y="48" width="398" height="814"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <inset key="separatorInset" minX="15" minY="0.0" maxX="0.0" maxY="0.0"/>
                 </tableView>
-                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="bsW-el-Bg1">
-                    <rect key="frame" x="197" y="471" width="20" height="20"/>
-                </activityIndicatorView>
             </subviews>
             <viewLayoutGuide key="safeArea" id="e9d-Nl-0c2"/>
-            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
-                <constraint firstItem="g99-Lt-sAY" firstAttribute="top" secondItem="e9d-Nl-0c2" secondAttribute="top" id="24x-xk-joS"/>
-                <constraint firstItem="e9d-Nl-0c2" firstAttribute="trailing" secondItem="odo-MN-kYA" secondAttribute="trailing" id="50K-qq-uXc"/>
-                <constraint firstItem="odo-MN-kYA" firstAttribute="leading" secondItem="e9d-Nl-0c2" secondAttribute="leading" id="6Fo-R0-GTw"/>
-                <constraint firstItem="bsW-el-Bg1" firstAttribute="centerY" secondItem="odo-MN-kYA" secondAttribute="centerY" id="79n-HA-tY5"/>
-                <constraint firstItem="g99-Lt-sAY" firstAttribute="trailing" secondItem="e9d-Nl-0c2" secondAttribute="trailing" id="BJN-hR-z6a"/>
-                <constraint firstItem="g99-Lt-sAY" firstAttribute="leading" secondItem="e9d-Nl-0c2" secondAttribute="leading" id="C3T-eQ-HTp"/>
+                <constraint firstItem="odo-MN-kYA" firstAttribute="top" secondItem="e9d-Nl-0c2" secondAttribute="top" id="2JD-N0-1PN"/>
+                <constraint firstItem="e9d-Nl-0c2" firstAttribute="trailing" secondItem="odo-MN-kYA" secondAttribute="trailing" constant="8" id="50K-qq-uXc"/>
+                <constraint firstItem="odo-MN-kYA" firstAttribute="leading" secondItem="e9d-Nl-0c2" secondAttribute="leading" constant="8" id="6Fo-R0-GTw"/>
                 <constraint firstItem="e9d-Nl-0c2" firstAttribute="bottom" secondItem="odo-MN-kYA" secondAttribute="bottom" id="lcO-hg-Hnw"/>
-                <constraint firstItem="bsW-el-Bg1" firstAttribute="centerX" secondItem="odo-MN-kYA" secondAttribute="centerX" id="uHr-Rz-hCq"/>
-                <constraint firstItem="odo-MN-kYA" firstAttribute="top" secondItem="g99-Lt-sAY" secondAttribute="bottom" id="xBu-4G-s4G"/>
             </constraints>
             <point key="canvasLocation" x="-775" y="42"/>
         </view>
     </objects>
-    <resources>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="systemGray6Color">
-            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-    </resources>
 </document>

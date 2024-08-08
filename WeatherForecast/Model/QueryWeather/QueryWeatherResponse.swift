@@ -8,17 +8,41 @@
 import Foundation
 
 struct QueryWeatherResponse: Decodable {
-    let cod: String
-    let message: Double
-    let cnt: Int
-    let city: City
-    let weatherItems: [WeatherItem]
+    let coord: Coordinate
+    let weather: [Weather]
+    let base: String
+    let detail: WeatherDetail
+    let visibility: Double
+    let wind: Wind
+    let rain: Rain?
+    let clouds: Clouds
+    let dt: Int
+    let sys: Sys
+    let timezone: Int
+    let cityId: Int
+    let cityName: String
+    let cod: Int
     
     private enum CodingKeys: String, CodingKey {
+        case coord = "coord"
+        case weather = "weather"
+        case base = "base"
+        case detail = "main"
+        case visibility = "visibility"
+        case wind = "wind"
+        case rain = "rain"
+        case clouds = "clouds"
+        case dt = "dt"
+        case sys = "sys"
+        case timezone = "timezone"
+        case cityId = "id"
+        case cityName = "name"
         case cod = "cod"
-        case message = "message"
-        case cnt = "cnt"
-        case city = "city"
-        case weatherItems = "list"
+    }
+}
+
+extension QueryWeatherResponse {
+    var date: Date {
+        Date(timeIntervalSince1970: TimeInterval(dt))
     }
 }

@@ -6,119 +6,105 @@
 //
 
 import XCTest
+import RealmSwift
 @testable import WeatherForecast
 
 class WeatherViewModelTests: XCTestCase {
     var viewModel: WeatherViewModel!
     var apiServiceMock: ApiServiceMock = .init()
-    var localDatabaseServiceMock: LocalDatabaseServiceMock = .init()
+    var localStorage: LocalStorageType!
     
     override func setUp() {
         super.setUp()
+        self.localStorage = RealmDatabaseService(realm: try! Realm())
         viewModel = WeatherViewModel(
             apiService: apiServiceMock,
-            localDatabaseService: localDatabaseServiceMock
+            localStorage: localStorage
         )
+        localStorage.deleteAll()
     }
     
-    func testGetWeatherSuccess() {
+    func testGetWeatherAtDefaultCity() {
         // Given
-        let response = Helper.getQueryWeatherResponse(at: "saigon")
-        apiServiceMock.queryWeatherResult = .success(response)
-
+        let weatherResponse = Helper.getQueryWeatherResponse(at: "saigon")
+        apiServiceMock.queryWeatherResult = .success(weatherResponse)
         // When
-        viewModel.viewDidLoad()
+        var weatherItems = [QueryWeatherResponse]()
+        viewModel.weatherItems = { items in
+            weatherItems = items
+        }
+        viewModel.getWeather()
         
         // Then
-        XCTAssertTrue(viewModel.items.count == 7)
+        XCTAssertTrue(weatherItems.count == 1)
+        XCTAssert(weatherItems[0].cityId == weatherResponse.cityId)
     }
     
-    func testGetWeatherFailure() {
+    func testGetWeatherWithSavedCities() {
         // Given
-        apiServiceMock.queryWeatherResult = .failure(.network)
-        localDatabaseServiceMock.clear()
-
-        // When
-        viewModel.viewDidLoad()
+        let weatherResponse = Helper.getQueryWeatherResponse(at: "saigon")
+        apiServiceMock.queryWeatherResult = .success(weatherResponse)
+        localStorage.create(City(id: weatherResponse.cityId, name: weatherResponse.cityName))
         
-        // Then
-        XCTAssertTrue(viewModel.items.count == 0)
-        localDatabaseServiceMock.getWeatherObjects(at: "saigon") { (items) in
-            XCTAssertTrue(items == nil)
+        // When
+        var weatherItems = [QueryWeatherResponse]()
+        viewModel.weatherItems = { items in
+            weatherItems = items
+        }
+        viewModel.getWeather()
+        
+        // Given
+        XCTAssertTrue(weatherItems.count == 1)
+        XCTAssert(weatherItems[0].cityId == weatherResponse.cityId)
+    }
+    
+    func testSearchWeather() {
+        // Given
+        let cityName = "tokyo"
+        let weatherResponse = Helper.getQueryWeatherResponse(at: cityName)
+        apiServiceMock.queryWeatherResult = .success(weatherResponse)
+        
+        // When
+        var weatherItems = [QueryWeatherResponse]()
+        viewModel.weatherItems = { items in
+            weatherItems = items
+        }
+        viewModel.searchWeather(at: cityName) { response in
+            // Then
+            XCTAssertTrue(response.cityName == cityName)
+            XCTAssertTrue(weatherItems.isEmpty)
         }
     }
     
-    func testSearchWeatherByCitySuccess() {
+    func testRemoveCity() {
         // Given
-        let response = Helper.getQueryWeatherResponse(at: "saigon")
-        apiServiceMock.queryWeatherResult = .success(response)
+        let sgWeatherResponse = Helper.getQueryWeatherResponse(at: "saigon")
+        apiServiceMock.queryWeatherResult = .success(sgWeatherResponse)
+        viewModel.getWeather()
+        localStorage.create(City(id: sgWeatherResponse.cityId, name: sgWeatherResponse.cityName))
+        
+        let tokyoWeatherResponse = Helper.getQueryWeatherResponse(at: "tokyo")
+        apiServiceMock.queryWeatherResult = .success(tokyoWeatherResponse)
+        viewModel.getWeather()
+        localStorage.create(City(id: tokyoWeatherResponse.cityId, name: tokyoWeatherResponse.cityName))
         
         // When
-        viewModel.viewDidLoad()
+        viewModel.removeCity(at: 1)
         
         // Then
-        XCTAssertTrue(viewModel.items.count == 7)
-        
-        // When
-        let searchText = "london"
-        localDatabaseServiceMock.insertWeatherObjects(
-            at: response.city,
-            objects: [response.weatherItems[0]],
-            with: searchText,
-            completionHandler: nil
-        )
-        viewModel.searchWeather(at: searchText)
-        
-        // Then
-        XCTAssertTrue(viewModel.items.count == 1)
+        let total = localStorage.readAll().count
+        XCTAssertTrue(total == 1, "The total of local storage (\(total)) is not equal to 1.")
     }
     
-    func testSearchWeatherByCityFailure() {
+    func testSearchCity() {
         // Given
-        let response = Helper.getQueryWeatherResponse(at: "saigon")
-        apiServiceMock.queryWeatherResult = .success(response)
+        let searchText = "Paris"
         
         // When
-        viewModel.viewDidLoad()
+        viewModel.searchCity(with: searchText) { items in
+            // Given
+            XCTAssertTrue(!items.isEmpty)
+        }
         
-        // Then
-        XCTAssertTrue(viewModel.items.count == 7)
-        
-        // When
-        let searchText = "london"
-        apiServiceMock.queryWeatherResult = .failure(.unknown)
-        viewModel.searchWeather(at: searchText)
-        
-        // Then
-        XCTAssertTrue(viewModel.items.isEmpty)
-    }
-    
-    func testSearchEmpty() {
-        // Given
-        let response = Helper.getQueryWeatherResponse(at: "saigon")
-        apiServiceMock.queryWeatherResult = .success(response)
-        
-        // When
-        viewModel.viewDidLoad()
-        
-        // Then
-        XCTAssertTrue(viewModel.items.count == 7)
-        
-        // When
-        let searchText = "sg"
-        viewModel.searchWeather(at: searchText)
-        
-        // Then
-        XCTAssertTrue(viewModel.items.count == 7)
-        
-        // When
-        localDatabaseServiceMock.insertWeatherObjects(
-            at: response.city,
-            objects: [response.weatherItems[0]],
-            with: "saigon",
-            completionHandler: nil
-        )
-        viewModel.searchWeather(at: "")
-        XCTAssertTrue(viewModel.items.count == 1)
     }
 }

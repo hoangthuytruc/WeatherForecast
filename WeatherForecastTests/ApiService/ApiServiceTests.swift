@@ -18,13 +18,18 @@ class ApiServiceTests: XCTestCase {
     
     func testGetWeatherSuccess() {
         // Given
-        let city = "london"
-        let expectation = self.expectation(description: "Get API successfully")
+        let city = "Ho Chi Minh City"
+        let expectation = expectation(description: "Get API successfully")
         
         // When
-        apiService.queryWeather(
-            at: city) { (result) in
+        apiService.queryWeather(at: city) { (result) in
             // Then
+            switch result {
+            case .success(let response):
+                XCTAssertTrue(city == response.cityName)
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
             expectation.fulfill()
         }
         waitForExpectations(timeout: 2, handler: nil)

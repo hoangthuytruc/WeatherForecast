@@ -7,146 +7,120 @@
 
 import UIKit
 
-class WeatherViewController: BaseViewController {
-    @IBOutlet weak var searchBar: UISearchBar!
+class WeatherViewController: BaseViewController, UISearchResultsUpdating {
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     private var viewModel: WeatherViewModelType
+    private let vcFactory: ViewcontrollerFactory
+    private var dataSource: WeatherDataSource?
+    private lazy var resultsVC = vcFactory.makeSearchResultsController()
     private var timer: Timer?
-    private var textSizeView: TextSizeView?
         
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
     
-    init(viewModel: WeatherViewModelType) {
+    init(viewModel: WeatherViewModelType, vcFactory: ViewcontrollerFactory) {
         self.viewModel = viewModel
+        self.vcFactory = vcFactory
         super.init()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Weather Forecast"
-        navigationItem.rightBarButtonItem = UIBarButtonItem(
-            image: UIImage(named: "ic_text_size"),
-            style: .plain,
-            target: self,
-            action: #selector(showTextSizeView)
-        )
-        activityIndicator.isHidden = true
+        title = "Weather"
         
+        setupSearchController()
+
         tableView.register(
             UINib(nibName: String(describing: WeatherCell.self), bundle: nil),
             forCellReuseIdentifier: "Cell"
         )
-        tableView.dataSource = self
-        searchBar.delegate = self
-        view.addGestureRecognizer(
-            UITapGestureRecognizer(
-                target: self,
-                action: #selector(dismissTextSizeView)
-            )
-        )
+        
+        dataSource = WeatherDataSource()
+        dataSource?.didSelectItemAt = {[weak self] item in
+            self?.presentWeatherDetailViewController(item)
+        }
+        dataSource?.didDeleteRowAt = {[weak self] idx in
+            self?.viewModel.removeCity(at: idx)
+        }
+        tableView.dataSource = dataSource
+        tableView.delegate = dataSource
+        
         viewModel.delegate = self
-        viewModel.viewDidLoad()
+        
+        viewModel.weatherItems = { [weak self] items in
+            self?.dataSource?.items = items
+            self?.tableView.reloadData()
+        }
+        
+        viewModel.getWeather()
+        viewModel.observeChanges()
     }
     
-    @objc func showTextSizeView() {
-        guard textSizeView == nil else {
+    fileprivate func setupSearchController() {
+        edgesForExtendedLayout = .top
+        extendedLayoutIncludesOpaqueBars = true
+        let searchController = UISearchController(searchResultsController: resultsVC)
+        searchController.searchBar.placeholder = "Search for a city"
+        searchController.searchBar.delegate = self
+        if #available(iOS 13.0, *) {
+            searchController.showsSearchResultsController = true
+        }
+        searchController.obscuresBackgroundDuringPresentation = true
+        searchController.searchResultsUpdater = self
+        resultsVC.itemSelected = { [weak self] item in
+            self?.viewModel.searchWeather(at: item.name) { response in
+                self?.presentWeatherDetailViewController(response)
+            }
+            searchController.isActive = false
+        }
+        navigationItem.searchController = searchController
+        navigationItem.hidesSearchBarWhenScrolling = false
+    }
+    
+    func updateSearchResults(for searchController: UISearchController) {
+        guard let searchText = searchController.searchBar.text else {
             return
         }
-        textSizeView = TextSizeView.fromNib()
-        textSizeView?.delegate = self
-        view.insertSubview(textSizeView!, aboveSubview: view)
-        NSLayoutConstraint.activate([
-            textSizeView!.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            textSizeView!.trailingAnchor.constraint(equalTo: view.trailingAnchor)
-        ])
+
+        timer?.invalidate()
+        timer = Timer.scheduledTimer(withTimeInterval: 0.3, repeats: false, block: { [weak self] _ in
+            self?.viewModel.searchCity(with: searchText) { items in
+                DispatchQueue.main.async {
+                    self?.resultsVC.filteredCities = items
+                    self?.resultsVC.tableView.reloadData()
+                }
+            }
+        })
     }
     
-    @objc func searchWeather() {
-        if let text = searchBar.text {
-            viewModel.searchWeather(at: text)
-        }
+    fileprivate func presentWeatherDetailViewController(_ item: QueryWeatherResponse) {
+        let controller = vcFactory.makeWeatherDetailController(item: item)
+        present(BaseNavigationController(rootViewController: controller), animated: true)
     }
     
-    @objc func dismissTextSizeView(touch: UITapGestureRecognizer) {
-        let touchPoint = touch.location(in: view)
-        if let subView = textSizeView,
-           !subView.frame.contains(touchPoint) {
-            subView.removeFromSuperview()
-            textSizeView = nil
-        }
+    deinit {
+        viewModel.invalidateObservation()
     }
 }
 
-extension WeatherViewController: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.items.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "Cell")
-            as? WeatherCell else {
-            return UITableViewCell()
-        }
-        cell.configureCell(viewModel.items[indexPath.row])
-        return cell
-    }
-}
-
+// MARK: - WeatherViewModelDelegate
 extension WeatherViewController: WeatherViewModelDelegate {
-    func viewWillQueryWeather() {
-        DispatchQueue.main.async {
-            self.activityIndicator.isHidden = false
-            self.activityIndicator.startAnimating()
-        }
-    }
-    
-    func viewDidQueryWeather() {
-        DispatchQueue.main.async {
-            self.activityIndicator.isHidden = true
-            self.activityIndicator.stopAnimating()
-        }
-    }
-    func reloadData() {
-        tableView.reloadData()
-    }
-    
     func showError(_ error: BaseError) {
         show(message: error.localizedDescription)
     }
 }
 
 extension WeatherViewController: UISearchBarDelegate {
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        if timer != nil {
-            timer?.invalidate()
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        navigationItem.searchController?.isActive = false
+        guard let searchText = searchBar.text else {
+            return
         }
-        
-        timer = Timer.scheduledTimer(
-            timeInterval: 1,
-            target: self,
-            selector: #selector(searchWeather),
-            userInfo: nil,
-            repeats: false
-        )
-    }
-    
-    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        searchBar.text = nil
-        searchBar.endEditing(true)
-        viewModel.searchWeather(at: "")
-    }
-}
-
-extension WeatherViewController: TextSizeViewDelegate {
-    func textSizeDidChange(_ textSize: CGFloat) {
-        view.subviews.forEach({ view in
-            let decorator = TextSizeDecorator(view)
-            decorator.apply(newTextSize: textSize)
-        })
+        viewModel.searchWeather(at: searchText) { [weak self] response in
+            self?.presentWeatherDetailViewController(response)
+        }
     }
 }
