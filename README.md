@@ -1,6 +1,6 @@
 # Weather App
-WeatherForecast is an application to retrieve the weather information of a specific city. The main features include:
-- Retrive the weather information of a specific city.
+WeatherForecast is an application to retrieve the weather information for a specific city. The main features include:
+- Retrieve the weather information for a specific city.
 - Add the favorite cities.
 
 ## Screenshots
